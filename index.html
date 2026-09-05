@@ -1,0 +1,1224 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Мастерская сайтов — готовые дизайны для вашего бизнеса</title>
+<meta name="description" content="Витрина готовых дизайнов сайтов. Выберите понравившийся шаблон и закажите сайт под свой бизнес.">
+<style>
+/* ============================================================
+   БАЗА
+============================================================ */
+:root{
+  --bg:#f6f4ef;
+  --paper:#fffdf9;
+  --ink:#211f1b;
+  --muted:#6f6a60;
+  --line:#e3ded2;
+  --accent:#28584a;
+  --accent-dark:#1d4438;
+  --sans:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;
+  --serif:Georgia,"Times New Roman",serif;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  font-family:var(--sans);
+  background:var(--bg);
+  color:var(--ink);
+  font-size:16px;
+  line-height:1.6;
+  -webkit-font-smoothing:antialiased;
+}
+body.locked{overflow:hidden}
+img{max-width:100%;display:block}
+a{color:inherit}
+button{font-family:inherit;cursor:pointer}
+section{scroll-margin-top:84px}
+.wrap{max-width:1160px;margin:0 auto;padding:0 24px}
+h1,h2,h3{font-family:var(--serif);font-weight:400;line-height:1.2}
+.kicker{
+  display:inline-block;
+  font-size:11px;letter-spacing:.28em;text-transform:uppercase;
+  color:var(--accent);margin-bottom:14px;
+}
+.section-title{font-size:clamp(26px,3.4vw,36px);margin-bottom:10px}
+.section-sub{color:var(--muted);max-width:560px;margin-bottom:36px}
+
+/* Кнопки */
+.btn{
+  display:inline-block;border:1px solid var(--ink);background:var(--ink);color:#fff;
+  font-size:13px;letter-spacing:.06em;padding:13px 26px;text-decoration:none;
+  transition:background .15s,color .15s,border-color .15s;text-align:center;
+}
+.btn:hover{background:var(--accent);border-color:var(--accent)}
+.btn-ghost{background:transparent;color:var(--ink)}
+.btn-ghost:hover{background:var(--ink);border-color:var(--ink);color:#fff}
+.btn-sm{padding:10px 18px;font-size:12px}
+
+/* ============================================================
+   ШАПКА
+============================================================ */
+header{
+  position:sticky;top:0;z-index:50;
+  background:rgba(246,244,239,.94);backdrop-filter:blur(8px);
+  border-bottom:1px solid var(--line);
+}
+.header-in{display:flex;align-items:center;justify-content:space-between;height:66px}
+.logo{font-family:var(--serif);font-size:19px;text-decoration:none;display:flex;align-items:center;gap:10px}
+.logo-mark{width:12px;height:12px;background:var(--accent);flex:none}
+.logo small{font-family:var(--sans);font-size:10px;letter-spacing:.22em;text-transform:uppercase;color:var(--muted);display:block;line-height:1.2}
+nav.main-nav{display:flex;gap:26px;align-items:center}
+nav.main-nav a{font-size:13.5px;color:var(--muted);text-decoration:none}
+nav.main-nav a:hover{color:var(--ink)}
+.nav-toggle{display:none;background:none;border:1px solid var(--line);width:42px;height:42px;position:relative}
+.nav-toggle span{position:absolute;left:11px;right:11px;height:2px;background:var(--ink);transition:transform .2s,opacity .2s}
+.nav-toggle span:nth-child(1){top:14px}
+.nav-toggle span:nth-child(2){top:20px}
+.nav-toggle span:nth-child(3){top:26px}
+header.menu-open .nav-toggle span:nth-child(1){transform:translateY(6px) rotate(45deg)}
+header.menu-open .nav-toggle span:nth-child(2){opacity:0}
+header.menu-open .nav-toggle span:nth-child(3){transform:translateY(-6px) rotate(-45deg)}
+
+/* ============================================================
+   ГЕРОЙ
+============================================================ */
+.hero{padding:84px 0 64px;border-bottom:1px solid var(--line)}
+.hero h1{font-size:clamp(34px,5vw,54px);max-width:640px;margin-bottom:18px}
+.hero h1 em{font-style:italic;color:var(--accent)}
+.hero p{font-size:18px;color:var(--muted);max-width:520px;margin-bottom:30px}
+.hero-actions{display:flex;gap:14px;flex-wrap:wrap;align-items:center}
+.hero-note{font-size:13px;color:var(--muted);margin-top:22px;border-left:2px solid var(--accent);padding-left:14px;max-width:460px}
+
+/* ============================================================
+   ФИЛЬТРЫ + ГАЛЕРЕЯ
+============================================================ */
+#templates{padding:64px 0 30px}
+.filters{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:34px}
+.chip{
+  border:1px solid var(--line);background:var(--paper);color:var(--muted);
+  font-size:13px;padding:9px 18px;transition:all .15s;
+}
+.chip:hover{border-color:var(--ink);color:var(--ink)}
+.chip.active{background:var(--ink);border-color:var(--ink);color:#fff}
+
+.gallery{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,440px),1fr));gap:34px 28px}
+.card{background:var(--paper);border:1px solid var(--line);display:flex;flex-direction:column;transition:box-shadow .2s}
+.card:hover{box-shadow:0 14px 34px rgba(33,31,27,.1)}
+.card.hidden{display:none}
+.card-body{padding:20px 22px 22px;display:flex;flex-direction:column;flex:1}
+.tag{
+  align-self:flex-start;font-size:10px;letter-spacing:.2em;text-transform:uppercase;
+  color:var(--accent);border:1px solid var(--accent);padding:4px 10px;margin-bottom:12px;
+}
+.card-body h3{font-size:21px;margin-bottom:8px}
+.card-body>p{font-size:14px;color:var(--muted);flex:1}
+.card-actions{display:flex;gap:10px;margin-top:18px;flex-wrap:wrap}
+
+/* ============================================================
+   ПРЕВЬЮ ШАБЛОНОВ (мини-сайты 900×620, масштабируются)
+============================================================ */
+.preview{position:relative;aspect-ratio:900/620;overflow:hidden;background:#fff;border-bottom:1px solid var(--line)}
+.preview .site{
+  width:900px;height:620px;position:absolute;top:0;left:0;
+  transform:scale(var(--s,1));transform-origin:top left;
+}
+
+/* ---- 1. Интернет-магазин одежды ---- */
+.tpl-shop{background:#fff;color:#191817;font-family:var(--serif)}
+.tpl-shop .sh-nav{display:flex;align-items:center;justify-content:space-between;height:64px;padding:0 48px;border-bottom:1px solid #e8e4dd}
+.tpl-shop .sh-logo{letter-spacing:.32em;font-size:15px;font-weight:700}
+.tpl-shop .sh-nav nav{font-family:var(--sans);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:#7a756c}
+.tpl-shop .sh-cart{font-family:var(--sans);font-size:11px;border:1px solid #191817;padding:7px 14px;letter-spacing:.1em}
+.tpl-shop .sh-hero{display:grid;grid-template-columns:1fr 1.1fr;height:308px}
+.tpl-shop .sh-hero-text{padding:40px 48px;display:flex;flex-direction:column;gap:16px;justify-content:center}
+.tpl-shop .sh-eyebrow{font-family:var(--sans);font-size:10px;letter-spacing:.3em;text-transform:uppercase;color:#a39b8d}
+.tpl-shop .sh-hero-text h2{font-size:33px;font-weight:400;line-height:1.2;max-width:330px}
+.tpl-shop .sh-btn{align-self:flex-start;background:#191817;color:#fff;font-family:var(--sans);font-size:11px;letter-spacing:.16em;text-transform:uppercase;padding:12px 26px}
+.tpl-shop .sh-hero-img{background:linear-gradient(165deg,#d9d0c3 0%,#c2b6a4 55%,#a2957f 100%)}
+.tpl-shop .sh-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;padding:24px 48px 0}
+.tpl-shop .sh-img{height:104px}
+.tpl-shop .i1{background:linear-gradient(180deg,#cfc6b8,#a89b86)}
+.tpl-shop .i2{background:linear-gradient(180deg,#b9bdb9,#8e948f)}
+.tpl-shop .i3{background:linear-gradient(180deg,#d8c9c0,#b09a8e)}
+.tpl-shop .sh-row{display:flex;justify-content:space-between;font-size:12.5px;margin-top:10px;font-family:var(--sans)}
+.tpl-shop .sh-row span{color:#4c4841}
+.tpl-shop .sh-foot{margin-top:16px;background:#191817;color:#8d877c;height:46px;display:flex;align-items:center;justify-content:space-between;padding:0 48px;font-size:10px;letter-spacing:.22em;text-transform:uppercase}
+
+/* ---- 2. Барбершоп ---- */
+.tpl-barber{background:#181614;color:#efeae2;font-family:Arial,sans-serif}
+.tpl-barber .tb-nav{display:flex;justify-content:space-between;align-items:center;height:58px;padding:0 40px;border-bottom:1px solid #2c2823}
+.tpl-barber .tb-logo{font-weight:900;font-size:17px;letter-spacing:.16em}
+.tpl-barber .tb-logo em{color:#d6482f;font-style:normal}
+.tpl-barber .tb-nav nav{font-size:10.5px;color:#9a938a;letter-spacing:.16em;text-transform:uppercase}
+.tpl-barber .tb-hero{display:grid;grid-template-columns:1.15fr .85fr}
+.tpl-barber .tb-left{padding:36px 40px 26px}
+.tpl-barber .tb-left h2{font-size:42px;font-weight:900;line-height:1.02;text-transform:uppercase;letter-spacing:.02em}
+.tpl-barber .tb-left h2 span{color:#d6482f}
+.tpl-barber .tb-sub{font-size:12.5px;color:#b0a89c;margin:14px 0 20px;max-width:300px;line-height:1.55}
+.tpl-barber .tb-btn{background:#d6482f;color:#fff;font-weight:700;font-size:11px;letter-spacing:.14em;padding:12px 24px;text-transform:uppercase;display:inline-block}
+.tpl-barber .tb-img{background:linear-gradient(200deg,#3a332c,#241f1a 65%);border-left:4px solid #d6482f}
+.tpl-barber .tb-prices{padding:20px 40px 0}
+.tpl-barber .tb-title{font-size:10px;letter-spacing:.3em;color:#9a938a;text-transform:uppercase;margin-bottom:10px}
+.tpl-barber .tb-row{display:flex;align-items:baseline;font-size:13px;padding:6px 0}
+.tpl-barber .tb-dots{flex:1;border-bottom:1px dotted #4a443c;margin:0 10px}
+.tpl-barber .tb-row b{color:#d6482f}
+.tpl-barber .tb-foot{margin-top:18px;border-top:1px solid #2c2823;height:44px;display:flex;align-items:center;justify-content:space-between;padding:0 40px;font-size:10.5px;color:#9a938a;letter-spacing:.08em}
+
+/* ---- 3. Ресторан ---- */
+.tpl-rest{background:#f6f1e7;color:#22392c;font-family:var(--serif);text-align:center}
+.tpl-rest .tr-nav{height:54px;display:flex;justify-content:center;gap:30px;align-items:center;font-family:var(--sans);font-size:10px;letter-spacing:.26em;text-transform:uppercase;color:#6d7a6c;border-bottom:1px solid #ddd3bf}
+.tpl-rest .tr-hero{padding:26px 60px 0}
+.tpl-rest .tr-kicker{font-family:var(--sans);font-size:10px;letter-spacing:.36em;text-transform:uppercase;color:#b98a2f}
+.tpl-rest .tr-hero h2{font-size:38px;font-style:italic;font-weight:400;margin:8px 0 6px}
+.tpl-rest .tr-hero p{font-size:12.5px;color:#5d6b58;max-width:430px;margin:0 auto;line-height:1.6;font-family:var(--sans)}
+.tpl-rest .tr-img{width:520px;height:158px;margin:18px auto 0;background:linear-gradient(160deg,#31473a,#1d2f24);border:6px solid #fff;box-shadow:0 10px 26px rgba(34,57,44,.18)}
+.tpl-rest .tr-menu{display:grid;grid-template-columns:1fr 1fr;gap:6px 56px;max-width:620px;margin:20px auto 0;padding:0 40px;text-align:left}
+.tpl-rest .tr-item{display:flex;justify-content:space-between;border-bottom:1px solid #ddd3bf;padding:7px 2px;font-size:13px}
+.tpl-rest .tr-item i{color:#b98a2f;font-style:normal}
+.tpl-rest .tr-btn{margin:20px auto 28px;display:table;background:#22392c;color:#f6f1e7;padding:12px 34px;font-family:var(--sans);font-size:10px;letter-spacing:.26em;text-transform:uppercase}
+
+/* ---- 4. Кофейня ---- */
+.tpl-cafe{background:#fbf5ec;color:#3d2f26;font-family:Arial,sans-serif}
+.tpl-cafe .tc-nav{display:flex;justify-content:space-between;align-items:center;padding:20px 46px 0}
+.tpl-cafe .tc-logo{font-weight:800;font-size:17px}
+.tpl-cafe .tc-logo span{color:#c2622f}
+.tpl-cafe .tc-nav nav{font-size:11px;color:#8a7a6c;letter-spacing:.06em}
+.tpl-cafe .tc-main{display:grid;grid-template-columns:.85fr 1.15fr;gap:36px;padding:22px 46px 0;align-items:center}
+.tpl-cafe .tc-circle{width:236px;height:236px;border-radius:50%;background:radial-gradient(circle at 35% 30%,#8a5a3b,#5d3a24 72%);position:relative;box-shadow:inset 0 0 0 10px #f0e2cf;margin:0 auto}
+.tpl-cafe .tc-badge{position:absolute;right:-16px;top:4px;background:#c2622f;color:#fff;border-radius:50%;width:82px;height:82px;display:flex;align-items:center;justify-content:center;text-align:center;font-size:9.5px;font-weight:700;line-height:1.3;transform:rotate(12deg)}
+.tpl-cafe .tc-text h2{font-size:30px;line-height:1.15;font-weight:800;font-family:Arial,sans-serif}
+.tpl-cafe .tc-text h2 em{color:#c2622f;font-style:normal}
+.tpl-cafe .tc-text p{font-size:12.5px;color:#7d6c5e;line-height:1.6;margin:10px 0 14px;max-width:360px}
+.tpl-cafe .tc-chips{display:flex;gap:8px;flex-wrap:wrap}
+.tpl-cafe .tc-chip{border:1.5px solid #3d2f26;border-radius:999px;padding:5px 13px;font-size:10.5px;font-weight:700}
+.tpl-cafe .tc-strip{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;padding:26px 46px 0}
+.tpl-cafe .tc-tile{background:#fff;border-radius:14px;padding:14px 16px;box-shadow:0 6px 16px rgba(93,58,36,.08)}
+.tpl-cafe .tc-tile b{font-size:12.5px;display:block}
+.tpl-cafe .tc-tile span{font-size:11px;color:#8a7a6c;line-height:1.45;display:block;margin-top:2px}
+
+/* ---- 5. Автосервис ---- */
+.tpl-auto{background:#eef0f2;color:#151a20;font-family:Arial,sans-serif}
+.tpl-auto .ta-top{display:flex;justify-content:space-between;align-items:center;height:56px;padding:0 44px;background:#151a20;color:#fff}
+.tpl-auto .ta-logo{font-weight:900;font-size:15px;letter-spacing:.06em}
+.tpl-auto .ta-logo span{color:#f07d1a}
+.tpl-auto .ta-phone{font-weight:700;font-size:12.5px}
+.tpl-auto .ta-hero{display:grid;grid-template-columns:1.1fr .9fr}
+.tpl-auto .ta-left{padding:32px 44px 24px}
+.tpl-auto .ta-left h2{font-size:29px;font-weight:900;line-height:1.12;text-transform:uppercase}
+.tpl-auto .ta-left p{font-size:12px;color:#5a6470;margin:10px 0 16px;line-height:1.55;max-width:370px}
+.tpl-auto .ta-list{list-style:none;display:grid;gap:8px}
+.tpl-auto .ta-list li{font-size:12.5px;font-weight:700;padding-left:22px;position:relative}
+.tpl-auto .ta-list li::before{content:'';position:absolute;left:0;top:2px;width:12px;height:12px;background:#f07d1a}
+.tpl-auto .ta-img{background:linear-gradient(210deg,#3d454f,#22282f 70%);position:relative}
+.tpl-auto .ta-img::after{content:'';position:absolute;left:0;right:0;bottom:0;height:6px;background:#f07d1a}
+.tpl-auto .ta-services{display:grid;grid-template-columns:repeat(4,1fr);margin:24px 44px 0;background:#fff;border:1px solid #c9ced4}
+.tpl-auto .ta-srv{padding:14px 14px;border-right:1px solid #c9ced4;border-bottom:1px solid #c9ced4}
+.tpl-auto .ta-srv:last-child{border-right:none}
+.tpl-auto .ta-num{font-size:10.5px;color:#f07d1a;font-weight:900;letter-spacing:.1em}
+.tpl-auto .ta-srv b{display:block;font-size:12px;margin-top:5px}
+.tpl-auto .ta-srv span{font-size:10.5px;color:#5a6470;line-height:1.4;display:block;margin-top:2px}
+.tpl-auto .ta-banner{margin:22px 44px 0;background:#151a20;color:#fff;display:flex;justify-content:space-between;align-items:center;padding:13px 20px;font-size:12px}
+.tpl-auto .ta-banner b{color:#f07d1a}
+
+/* ---- 6. Салон красоты ---- */
+.tpl-beauty{background:#fdf5f6;color:#46343a;font-family:var(--serif)}
+.tpl-beauty .ty-nav{display:flex;justify-content:space-between;align-items:center;padding:22px 44px 0;font-family:Arial,sans-serif}
+.tpl-beauty .ty-logo{font-family:var(--serif);font-style:italic;font-size:18px}
+.tpl-beauty .ty-nav nav{font-size:10px;color:#a08890;letter-spacing:.2em;text-transform:uppercase}
+.tpl-beauty .ty-hero{text-align:center;padding:14px 40px 0}
+.tpl-beauty .ty-kicker{font-family:Arial;font-size:9.5px;letter-spacing:.42em;color:#c48ca0;text-transform:uppercase}
+.tpl-beauty .ty-hero h2{font-size:34px;font-style:italic;font-weight:400;margin:6px 0 8px}
+.tpl-beauty .ty-hero p{font-size:12.5px;color:#8d747c;max-width:430px;margin:0 auto;line-height:1.6;font-family:Arial,sans-serif}
+.tpl-beauty .ty-cols{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;padding:24px 70px 0}
+.tpl-beauty .ty-col{background:#fff;border-radius:16px;padding:20px 18px;text-align:center;box-shadow:0 8px 20px rgba(196,140,160,.12)}
+.tpl-beauty .ty-ic{width:42px;height:42px;border-radius:50%;margin:0 auto 12px;background:linear-gradient(140deg,#f2c7d3,#dfa4b6)}
+.tpl-beauty .ty-col b{font-size:14px}
+.tpl-beauty .ty-col span{display:block;font-size:11px;color:#a08890;margin-top:5px;line-height:1.5;font-family:Arial,sans-serif}
+.tpl-beauty .ty-cta{margin:24px auto 30px;display:table;background:#46343a;color:#fdf5f6;border-radius:999px;padding:11px 30px;font-family:Arial;font-size:10px;letter-spacing:.22em;text-transform:uppercase}
+
+/* ---- 7. Строительная компания ---- */
+.tpl-build{background:#fff;color:#16233a;font-family:Arial,sans-serif}
+.tpl-build .td-bar{height:32px;background:#16233a;color:#9fb0c8;display:flex;align-items:center;justify-content:space-between;padding:0 40px;font-size:10px;letter-spacing:.1em}
+.tpl-build .td-nav{display:flex;justify-content:space-between;align-items:center;height:54px;padding:0 40px;border-bottom:1px solid #e2e6ec}
+.tpl-build .td-logo{font-weight:900;font-size:16px}
+.tpl-build .td-logo i{color:#f2b705;font-style:normal}
+.tpl-build .td-nav nav{font-size:10.5px;color:#5c6b82;text-transform:uppercase;letter-spacing:.12em}
+.tpl-build .td-hero{display:grid;grid-template-columns:1.05fr .95fr;gap:30px;padding:28px 40px 0;align-items:start}
+.tpl-build .td-left h2{font-size:28px;font-weight:900;line-height:1.15;text-transform:uppercase;font-family:Arial,sans-serif}
+.tpl-build .td-left h2 span{color:#16233a;background:#f2b705;padding:0 8px}
+.tpl-build .td-left p{font-size:12px;color:#5c6b82;line-height:1.6;margin:10px 0 14px}
+.tpl-build .td-checks{list-style:none;display:grid;gap:9px}
+.tpl-build .td-checks li{font-size:12.5px;font-weight:700;padding-left:24px;position:relative}
+.tpl-build .td-checks li::before{content:'';position:absolute;left:0;top:1px;width:13px;height:13px;background:#f2b705}
+.tpl-build .td-photos{display:grid;grid-template-columns:1fr 1fr;gap:10px;height:224px}
+.tpl-build .td-ph{background:linear-gradient(160deg,#c7cdd6,#9aa5b4)}
+.tpl-build .td-ph:nth-child(2){background:linear-gradient(200deg,#aeb6c2,#8792a1)}
+.tpl-build .td-ph:nth-child(3){background:linear-gradient(180deg,#9aa3b0,#b7bfca)}
+.tpl-build .td-ph:nth-child(4){background:linear-gradient(140deg,#b3bac5,#7f8a99)}
+.tpl-build .td-band{margin-top:26px;background:#16233a;color:#fff;display:flex;align-items:center;justify-content:space-between;padding:15px 40px}
+.tpl-build .td-band b{font-size:14px}
+.tpl-build .td-band span{font-size:10.5px;color:#9fb0c8;display:block}
+.tpl-build .td-btn{background:#f2b705;color:#16233a;font-weight:900;font-size:10.5px;padding:10px 18px;text-transform:uppercase}
+
+/* ---- 8. Фитнес-клуб ---- */
+.tpl-fit{background:#101214;color:#f2f4f5;font-family:Arial,sans-serif}
+.tpl-fit .tf-nav{display:flex;justify-content:space-between;align-items:center;height:56px;padding:0 40px;border-bottom:1px solid #23262a}
+.tpl-fit .tf-logo{font-weight:900;font-size:16px;letter-spacing:.16em}
+.tpl-fit .tf-logo span{color:#c6f24e}
+.tpl-fit .tf-nav nav{font-size:10px;color:#8b9097;letter-spacing:.18em;text-transform:uppercase}
+.tpl-fit .tf-hero{display:grid;grid-template-columns:1.1fr .9fr;min-height:296px}
+.tpl-fit .tf-left{padding:34px 0 0 40px}
+.tpl-fit .tf-left h2{font-size:52px;font-weight:900;line-height:.98;font-family:Arial,sans-serif}
+.tpl-fit .tf-left h2 span{color:#c6f24e}
+.tpl-fit .tf-left p{font-size:12.5px;color:#9aa0a8;margin:12px 0 18px;max-width:320px;line-height:1.55}
+.tpl-fit .tf-btn{background:#c6f24e;color:#101214;font-weight:900;font-size:11px;letter-spacing:.1em;padding:12px 24px;text-transform:uppercase;display:inline-block}
+.tpl-fit .tf-img{background:linear-gradient(215deg,#2a2e33,#16181b 65%);border-left:5px solid #c6f24e}
+.tpl-fit .tf-sched{padding:20px 40px 0}
+.tpl-fit .tf-title{font-size:10px;letter-spacing:.3em;color:#8b9097;text-transform:uppercase;margin-bottom:8px}
+.tpl-fit .tf-row{display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid #23262a;padding:9px 2px;font-size:12.5px}
+.tpl-fit .tf-row b{color:#c6f24e;font-size:10px;letter-spacing:.12em}
+
+/* ============================================================
+   КАК ЭТО РАБОТАЕТ
+============================================================ */
+#how{padding:64px 0;border-top:1px solid var(--line);background:var(--paper)}
+.steps{display:grid;grid-template-columns:repeat(3,1fr);gap:0;margin-top:10px}
+.step{padding:26px 30px 6px 0;margin:0 30px 0 0;border-top:2px solid var(--ink)}
+.step:last-child{margin-right:0}
+.step-num{font-family:var(--serif);font-size:40px;color:var(--accent);font-style:italic}
+.step h3{font-size:19px;margin:8px 0 8px}
+.step p{font-size:14px;color:var(--muted)}
+
+/* ============================================================
+   ЧТО ВХОДИТ
+============================================================ */
+#included{padding:64px 0;border-top:1px solid var(--line)}
+.included-grid{display:grid;grid-template-columns:1fr 1fr;gap:2px 56px;margin-top:6px}
+.inc-item{display:flex;gap:14px;padding:16px 0;border-bottom:1px solid var(--line)}
+.inc-mark{flex:none;width:26px;height:26px;border-radius:50%;background:var(--accent);color:#fff;display:flex;align-items:center;justify-content:center;font-size:13px;margin-top:2px}
+.inc-item b{display:block;font-size:15px}
+.inc-item span{font-size:13.5px;color:var(--muted)}
+
+/* ============================================================
+   ЦЕНЫ / ДОПОЛНИТЕЛЬНЫЕ УСЛУГИ
+============================================================ */
+#pricing{padding:64px 0;border-top:1px solid var(--line)}
+.pricing-grid{display:grid;grid-template-columns:.9fr 1.1fr;gap:44px;align-items:start;margin-top:6px}
+.pricing-offer{background:var(--accent);color:#f2f0ea;padding:34px 32px}
+.po-kicker{font-size:10px;letter-spacing:.28em;text-transform:uppercase;color:#b9d0c8}
+.po-name{font-family:var(--serif);font-size:24px;line-height:1.25;margin:10px 0 4px}
+.po-price{font-family:var(--serif);font-size:46px}
+.po-list{margin:18px 0 0;list-style:none;font-size:13.5px;color:#c4d6cf}
+.po-list li{padding:6px 0 6px 22px;position:relative}
+.po-list li::before{content:'✓';position:absolute;left:0;color:#b9d0c8}
+.pricing-offer .btn{margin-top:24px;width:100%;background:#fffdf9;border-color:#fffdf9;color:var(--accent)}
+.pricing-offer .btn:hover{background:transparent;color:#fffdf9;border-color:#fffdf9}
+details.price-row{border-bottom:1px solid var(--line)}
+details.price-row summary{
+  list-style:none;cursor:pointer;display:flex;align-items:baseline;
+  padding:13px 0;font-size:14.5px;
+}
+details.price-row summary::-webkit-details-marker{display:none}
+details.price-row summary:hover b{color:var(--accent)}
+details.price-row .plus{
+  flex:none;margin-left:14px;align-self:center;
+  font-family:var(--sans);font-size:18px;color:var(--accent);line-height:1;
+  transition:transform .2s;
+}
+details.price-row[open] .plus{transform:rotate(45deg)}
+details.price-row .dots{flex:1;border-bottom:1px dotted #b9b2a4;margin:0 12px;min-width:24px}
+details.price-row b{white-space:nowrap;font-family:var(--serif);font-weight:400;font-size:16px}
+details.price-row p{padding:1px 26px 15px 0;color:var(--muted);font-size:13.5px;line-height:1.6;max-width:560px}
+.price-note{font-size:12.5px;color:var(--muted);margin-top:16px}
+
+/* ============================================================
+   FAQ
+============================================================ */
+#faq{padding:64px 0;border-top:1px solid var(--line);background:var(--paper)}
+.faq-list{max-width:760px;margin-top:6px}
+details.faq{border-bottom:1px solid var(--line)}
+details.faq summary{
+  list-style:none;cursor:pointer;display:flex;justify-content:space-between;align-items:center;
+  gap:16px;padding:20px 4px;font-size:16.5px;font-family:var(--serif);
+}
+details.faq summary::-webkit-details-marker{display:none}
+details.faq summary::after{
+  content:'+';font-family:var(--sans);font-size:22px;color:var(--accent);flex:none;
+  transition:transform .2s;line-height:1;
+}
+details.faq[open] summary::after{transform:rotate(45deg)}
+details.faq .faq-a{padding:0 4px 20px;color:var(--muted);font-size:14.5px;max-width:640px}
+
+/* ============================================================
+   КОНТАКТЫ
+============================================================ */
+#contacts{padding:72px 0;background:var(--accent);color:#f2f0ea}
+#contacts .kicker{color:#b9d0c8}
+#contacts h2{font-size:clamp(28px,3.6vw,40px);max-width:560px}
+#contacts .contacts-sub{color:#c4d6cf;max-width:480px;margin:14px 0 32px}
+.contacts-actions{display:flex;gap:14px;flex-wrap:wrap}
+.btn-light{background:#fffdf9;border-color:#fffdf9;color:var(--accent)}
+.btn-light:hover{background:transparent;color:#fffdf9}
+.btn-outline-light{background:transparent;border-color:rgba(255,253,249,.5);color:#fffdf9}
+.btn-outline-light:hover{border-color:#fffdf9;background:transparent}
+
+/* ============================================================
+   ПОДВАЛ
+============================================================ */
+footer{padding:26px 0;border-top:1px solid var(--line);background:var(--bg)}
+.footer-in{display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap;font-size:13px;color:var(--muted)}
+.footer-in a{color:var(--muted);text-decoration:none}
+.footer-in a:hover{color:var(--ink)}
+
+/* ============================================================
+   МОДАЛЬНЫЕ ОКНА
+============================================================ */
+.overlay{
+  position:fixed;inset:0;z-index:100;background:rgba(24,22,18,.6);
+  display:flex;align-items:center;justify-content:center;padding:24px;
+  opacity:0;transition:opacity .2s;
+}
+.overlay[hidden]{display:none}
+.overlay.show{opacity:1}
+.modal{
+  background:var(--paper);max-width:1060px;width:100%;max-height:calc(100vh - 48px);
+  overflow:auto;position:relative;border:1px solid var(--line);
+  transform:translateY(12px);transition:transform .2s;
+}
+.overlay.show .modal{transform:translateY(0)}
+.modal-close{
+  position:sticky;top:0;margin-left:auto;display:flex;z-index:5;
+  width:44px;height:44px;align-items:center;justify-content:center;
+  background:var(--ink);color:#fff;border:none;font-size:20px;line-height:1;float:right;
+}
+.modal-close:hover{background:var(--accent)}
+
+/* Окно просмотра шаблона */
+.modal-view .mv-grid{display:grid;grid-template-columns:1.35fr 1fr;clear:both}
+.mv-preview{border-right:1px solid var(--line);background:#fff}
+.mv-preview .preview{border-bottom:none;aspect-ratio:900/640}
+.mv-info{padding:30px 30px 34px}
+.mv-info .tag{margin-bottom:14px}
+.mv-info h3{font-size:26px;margin-bottom:12px}
+.mv-info .mv-desc{font-size:14.5px;color:var(--muted);margin-bottom:22px}
+.mv-features{list-style:none;margin-bottom:26px}
+.mv-features li{padding:9px 0 9px 26px;position:relative;font-size:14px;border-bottom:1px solid var(--line)}
+.mv-features li::before{content:'✓';position:absolute;left:2px;color:var(--accent);font-weight:700}
+.mv-info .btn{width:100%}
+
+/* Окно заказа */
+.modal-order{max-width:520px}
+.order-body{padding:34px 34px 36px;clear:both}
+.order-body h3{font-size:24px;margin-bottom:6px}
+.order-body>p{font-size:14px;color:var(--muted);margin-bottom:24px}
+.field{margin-bottom:16px}
+.field label{display:block;font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin-bottom:6px}
+.field input,.field textarea{
+  width:100%;border:1px solid var(--line);background:#fff;padding:12px 14px;
+  font-size:15px;font-family:inherit;color:var(--ink);resize:vertical;
+}
+.field input:focus,.field textarea:focus{outline:none;border-color:var(--accent)}
+.field textarea{min-height:90px}
+.order-body .btn{width:100%;margin-top:6px}
+.order-note{font-size:12px;color:var(--muted);margin-top:14px;text-align:center}
+.success{padding:60px 20px;text-align:center}
+.success-ic{width:56px;height:56px;border-radius:50%;background:var(--accent);color:#fff;font-size:26px;display:flex;align-items:center;justify-content:center;margin:0 auto 20px}
+.success h3{font-size:22px;margin-bottom:10px}
+.success p{font-size:14.5px;color:var(--muted);max-width:340px;margin:0 auto 22px}
+.success p a{color:var(--accent)}
+
+/* ============================================================
+   АДАПТИВНОСТЬ
+============================================================ */
+@media (max-width:860px){
+  nav.main-nav{
+    display:none;position:absolute;top:66px;left:0;right:0;
+    background:var(--paper);border-bottom:1px solid var(--line);
+    flex-direction:column;align-items:stretch;padding:14px 24px 22px;gap:0;
+  }
+  nav.main-nav a{padding:13px 0;border-bottom:1px solid var(--line);font-size:15px}
+  nav.main-nav .btn{margin-top:16px}
+  header.menu-open nav.main-nav{display:flex}
+  .nav-toggle{display:block}
+}
+@media (max-width:760px){
+  .modal-view .mv-grid{grid-template-columns:1fr}
+  .mv-preview{border-right:none;border-bottom:1px solid var(--line)}
+  .steps{grid-template-columns:1fr;gap:0}
+  .step{margin:0 0 8px;padding:20px 0 14px}
+  .included-grid{grid-template-columns:1fr}
+  .pricing-grid{grid-template-columns:1fr;gap:30px}
+  .po-price{font-size:40px}
+  .hero{padding:56px 0 48px}
+  #templates,#how,#included,#pricing,#faq{padding:48px 0}
+}
+@media (max-width:480px){
+  .wrap{padding:0 18px}
+  .gallery{grid-template-columns:1fr;gap:26px}
+  .contacts-actions .btn{width:100%}
+  .filters{gap:8px}
+  .chip{padding:8px 14px;font-size:12.5px}
+  .overlay{padding:0}
+  .modal{max-height:100vh;height:100%;border:none}
+}
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  *,*::before,*::after{transition:none!important}
+}
+</style>
+</head>
+<body>
+
+<!-- ================= ШАПКА ================= -->
+<header id="header">
+  <div class="wrap header-in">
+    <a class="logo" href="#top">
+      <span class="logo-mark"></span>
+      <span>Мастерская сайтов<small>витрина готовых дизайнов</small></span>
+    </a>
+    <nav class="main-nav" id="mainNav">
+      <a href="#templates">Шаблоны</a>
+      <a href="#how">Как это работает</a>
+      <a href="#included">Что входит</a>
+      <a href="#pricing">Цены</a>
+      <a href="#faq">Вопросы</a>
+      <a href="#contacts">Контакты</a>
+      <a href="#contacts" class="btn btn-sm">Оставить заявку</a>
+    </nav>
+    <button class="nav-toggle" id="navToggle" aria-label="Открыть меню" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</header>
+
+<main id="top">
+
+  <!-- ================= ГЕРОЙ ================= -->
+  <section class="hero">
+    <div class="wrap">
+      <span class="kicker">Витрина готовых решений</span>
+      <h1>Сайт для вашего <em>бизнеса</em></h1>
+      <p>Выберите готовый дизайн и закажите сайт под свой бизнес.</p>
+      <div class="hero-actions">
+        <a href="#templates" class="btn">Посмотреть варианты</a>
+        <a href="#how" class="btn btn-ghost">Как это работает</a>
+      </div>
+      <p class="hero-note">Это не конструктор и не «сайты по подписке». Каждый шаблон адаптируется под ваш бизнес: тексты, фотографии, цвета и структура.</p>
+    </div>
+  </section>
+
+  <!-- ================= ШАБЛОНЫ ================= -->
+  <section id="templates">
+    <div class="wrap">
+      <span class="kicker">Портфолио шаблонов</span>
+      <h2 class="section-title">Шаблоны сайтов</h2>
+      <p class="section-sub">Выберите категорию и посмотрите, как может выглядеть сайт вашего бизнеса. Понравившийся вариант можно посмотреть крупно и заказать.</p>
+
+      <div class="filters" role="tablist" aria-label="Категории шаблонов">
+        <button class="chip active" data-filter="all">Все</button>
+        <button class="chip" data-filter="business">Бизнес</button>
+        <button class="chip" data-filter="beauty">Красота</button>
+        <button class="chip" data-filter="food">Еда</button>
+        <button class="chip" data-filter="shops">Магазины</button>
+        <button class="chip" data-filter="services">Услуги</button>
+        <button class="chip" data-filter="sport">Спорт</button>
+      </div>
+
+      <div class="gallery" id="gallery">
+
+        <!-- 1. Интернет-магазин одежды -->
+        <article class="card" data-id="shop" data-cat="shops">
+          <div class="preview"><div class="site tpl-shop">
+            <div class="sh-nav">
+              <span class="sh-logo">ATELIER 12</span>
+              <nav>Новинки&ensp;·&ensp;Женское&ensp;·&ensp;Мужское&ensp;·&ensp;Sale</nav>
+              <span class="sh-cart">Корзина (2)</span>
+            </div>
+            <div class="sh-hero">
+              <div class="sh-hero-text">
+                <span class="sh-eyebrow">Коллекция · весна</span>
+                <h2>Одежда, которая останется в гардеробе</h2>
+                <span class="sh-btn">Смотреть новинки</span>
+              </div>
+              <div class="sh-hero-img"></div>
+            </div>
+            <div class="sh-grid">
+              <div><div class="sh-img i1"></div><div class="sh-row"><span>Пальто «Осло»</span><b>14 900 ₽</b></div></div>
+              <div><div class="sh-img i2"></div><div class="sh-row"><span>Костюм «Линия»</span><b>11 500 ₽</b></div></div>
+              <div><div class="sh-img i3"></div><div class="sh-row"><span>Платье «Мюре»</span><b>8 900 ₽</b></div></div>
+            </div>
+            <div class="sh-foot"><span>Доставка по всей стране</span><span>Возврат 30 дней</span></div>
+          </div></div>
+          <div class="card-body">
+            <span class="tag">Магазины</span>
+            <h3>Интернет-магазин одежды</h3>
+            <p>Сдержанный магазин с витриной новинок и карточками товаров. Лаконичная типографика и спокойные цвета — для бренда, которому важна картинка, а не пёстрый интерфейс.</p>
+            <div class="card-actions">
+              <button class="btn btn-sm" data-view="shop">Посмотреть</button>
+              <button class="btn btn-ghost btn-sm" data-order="shop">Заказать такой сайт</button>
+            </div>
+          </div>
+        </article>
+
+        <!-- 2. Барбершоп -->
+        <article class="card" data-id="barber" data-cat="services">
+          <div class="preview"><div class="site tpl-barber">
+            <div class="tb-nav">
+              <span class="tb-logo">БРИТВА<em>.</em></span>
+              <nav>Услуги&ensp;·&ensp;Мастера&ensp;·&ensp;Цены&ensp;·&ensp;Запись</nav>
+            </div>
+            <div class="tb-hero">
+              <div class="tb-left">
+                <h2>Стрижки, которые <span>делают характер</span></h2>
+                <p class="tb-sub">Мужской барбершоп: классические и современные стрижки, уход за бородой, работа с любым типом волос.</p>
+                <span class="tb-btn">Записаться онлайн</span>
+              </div>
+              <div class="tb-img"></div>
+            </div>
+            <div class="tb-prices">
+              <div class="tb-title">Прайс-лист</div>
+              <div class="tb-row"><span>Мужская стрижка</span><span class="tb-dots"></span><b>1 500 ₽</b></div>
+              <div class="tb-row"><span>Стрижка машинкой</span><span class="tb-dots"></span><b>800 ₽</b></div>
+              <div class="tb-row"><span>Оформление бороды</span><span class="tb-dots"></span><b>1 000 ₽</b></div>
+            </div>
+            <div class="tb-foot"><span>Ежедневно с 10:00 до 22:00</span><span>ул. Центральная, 12</span></div>
+          </div></div>
+          <div class="card-body">
+            <span class="tag">Услуги</span>
+            <h3>Сайт барбершопа</h3>
+            <p>Тёмный дерзкий дизайн с прайс-листом и онлайн-записью. Жирная типографика и акцентный красный задают характер мужского клуба.</p>
+            <div class="card-actions">
+              <button class="btn btn-sm" data-view="barber">Посмотреть</button>
+              <button class="btn btn-ghost btn-sm" data-order="barber">Заказать такой сайт</button>
+            </div>
+          </div>
+        </article>
+
+        <!-- 3. Ресторан -->
+        <article class="card" data-id="rest" data-cat="food">
+          <div class="preview"><div class="site tpl-rest">
+            <div class="tr-nav"><span>Меню</span><span>О нас</span><span>Бронирование</span><span>Контакты</span></div>
+            <div class="tr-hero">
+              <span class="tr-kicker">Ресторан авторской кухни</span>
+              <h2>«Усадьба»</h2>
+              <p>Сезонные продукты, открытая кухня и винная карта. Ужин, ради которого стоит задержаться в городе.</p>
+              <div class="tr-img"></div>
+            </div>
+            <div class="tr-menu">
+              <div class="tr-item"><span>Тартар из говядины</span><i>690 ₽</i></div>
+              <div class="tr-item"><span>Утиная ножка</span><i>840 ₽</i></div>
+              <div class="tr-item"><span>Ризотто с белыми грибами</span><i>620 ₽</i></div>
+              <div class="tr-item"><span>Дегустационный сет</span><i>2 400 ₽</i></div>
+            </div>
+            <span class="tr-btn">Забронировать столик</span>
+          </div></div>
+          <div class="card-body">
+            <span class="tag">Еда</span>
+            <h3>Сайт ресторана</h3>
+            <p>Элегантный сайт с меню, бронированием и атмосферой зала. Приглушённая палитра и серифная типографика — тон «высокой кухни» без пафоса.</p>
+            <div class="card-actions">
+              <button class="btn btn-sm" data-view="rest">Посмотреть</button>
+              <button class="btn btn-ghost btn-sm" data-order="rest">Заказать такой сайт</button>
+            </div>
+          </div>
+        </article>
+
+        <!-- 4. Кофейня -->
+        <article class="card" data-id="cafe" data-cat="food">
+          <div class="preview"><div class="site tpl-cafe">
+            <div class="tc-nav">
+              <span class="tc-logo">Зерно<span>&amp;</span>Пар</span>
+              <nav>Меню&ensp;·&ensp;Адрес&ensp;·&ensp;О нас</nav>
+            </div>
+            <div class="tc-main">
+              <div class="tc-circle"><div class="tc-badge">открыто<br>с 8:00<br>каждый день</div></div>
+              <div class="tc-text">
+                <h2>Кофе, который <em>будит город</em></h2>
+                <p>Обжариваем зерно сами, варим на альтернативе и кормим завтраками весь день. Заходите за чашкой или работайте у окна.</p>
+                <div class="tc-chips">
+                  <span class="tc-chip">Эспрессо</span><span class="tc-chip">Фильтр</span><span class="tc-chip">Матча</span><span class="tc-chip">Завтраки</span>
+                </div>
+              </div>
+            </div>
+            <div class="tc-strip">
+              <div class="tc-tile"><b>Свой обжарщик</b><span>Зерно обжариваем небольшими партиями каждую неделю</span></div>
+              <div class="tc-tile"><b>Центр города</b><span>Две минуты от метро, окна на проспект</span></div>
+              <div class="tc-tile"><b>С собой</b><span>Кофе навынос и десерты в крафте</span></div>
+            </div>
+          </div></div>
+          <div class="card-body">
+            <span class="tag">Еда</span>
+            <h3>Сайт кофейни</h3>
+            <p>Дружелюбный светлый дизайн: круглая композиция, тёплые цвета, меню напитков и режим работы. Выглядит как место, куда хочется зайти.</p>
+            <div class="card-actions">
+              <button class="btn btn-sm" data-view="cafe">Посмотреть</button>
+              <button class="btn btn-ghost btn-sm" data-order="cafe">Заказать такой сайт</button>
+            </div>
+          </div>
+        </article>
+
+        <!-- 5. Автосервис -->
+        <article class="card" data-id="auto" data-cat="services">
+          <div class="preview"><div class="site tpl-auto">
+            <div class="ta-top"><span class="ta-logo">МОТОР<span>·СЕРВИС</span></span><span class="ta-phone">+7 (900) 000-00-00</span></div>
+            <div class="ta-hero">
+              <div class="ta-left">
+                <h2>Ремонт и обслуживание автомобилей</h2>
+                <p>Диагностика, ТО, ремонт ходовой и двигателя. Работаем по записи, даём гарантию на работы и запчасти.</p>
+                <ul class="ta-list">
+                  <li>Диагностика перед покупкой авто</li>
+                  <li>Техобслуживание по регламенту</li>
+                  <li>Ремонт ходовой и тормозной системы</li>
+                </ul>
+              </div>
+              <div class="ta-img"></div>
+            </div>
+            <div class="ta-services">
+              <div class="ta-srv"><span class="ta-num">01</span><b>Диагностика</b><span>Компьютерная и визуальная проверка</span></div>
+              <div class="ta-srv"><span class="ta-num">02</span><b>ТО</b><span>Замена масла, фильтров, свечей</span></div>
+              <div class="ta-srv"><span class="ta-num">03</span><b>Ходовая</b><span>Ремонт подвески и рулевого</span></div>
+              <div class="ta-srv"><span class="ta-num">04</span><b>Двигатель</b><span>От ремонта до капитального</span></div>
+            </div>
+            <div class="ta-banner"><span>Запишитесь на удобное время — перезвоним за 10 минут</span><b>Оставить заявку</b></div>
+          </div></div>
+          <div class="card-body">
+            <span class="tag">Услуги</span>
+            <h3>Сайт автосервиса</h3>
+            <p>Строгий рабочий сайт: список услуг, телефон всегда на виду, никаких лишних деталей. Дизайн внушает, что здесь знают своё дело.</p>
+            <div class="card-actions">
+              <button class="btn btn-sm" data-view="auto">Посмотреть</button>
+              <button class="btn btn-ghost btn-sm" data-order="auto">Заказать такой сайт</button>
+            </div>
+          </div>
+        </article>
+
+        <!-- 6. Салон красоты -->
+        <article class="card" data-id="salon" data-cat="beauty">
+          <div class="preview"><div class="site tpl-beauty">
+            <div class="ty-nav">
+              <span class="ty-logo">Мира</span>
+              <nav>Услуги&ensp;·&ensp;Мастера&ensp;·&ensp;Цены&ensp;·&ensp;Запись</nav>
+            </div>
+            <div class="ty-hero">
+              <span class="ty-kicker">Студия красоты</span>
+              <h2>Спокойная красота каждый день</h2>
+              <p>Стрижки, уход и ногтевой сервис в тихом пространстве с естественным светом. Работаем по записи.</p>
+            </div>
+            <div class="ty-cols">
+              <div class="ty-col"><div class="ty-ic"></div><b>Стрижки</b><span>Женские и мужские стрижки, укладки, уход за волосами</span></div>
+              <div class="ty-col"><div class="ty-ic"></div><b>Уход</b><span>Чистки, пилинги и домашние рекомендации от косметолога</span></div>
+              <div class="ty-col"><div class="ty-ic"></div><b>Ногти</b><span>Маникюр и педикюр в стерильных условиях, покрытие гель-лаком</span></div>
+            </div>
+            <span class="ty-cta">Записаться онлайн</span>
+          </div></div>
+          <div class="card-body">
+            <span class="tag">Красота</span>
+            <h3>Сайт салона красоты</h3>
+            <p>Нежный светлый дизайн: округлые формы, спокойные розовые оттенки, услуги и мастера. Премиальный тон без вычурности.</p>
+            <div class="card-actions">
+              <button class="btn btn-sm" data-view="salon">Посмотреть</button>
+              <button class="btn btn-ghost btn-sm" data-order="salon">Заказать такой сайт</button>
+            </div>
+          </div>
+        </article>
+
+        <!-- 7. Строительная компания -->
+        <article class="card" data-id="build" data-cat="business">
+          <div class="preview"><div class="site tpl-build">
+            <div class="td-bar"><span>Работаем по договору · смета до начала работ</span><span>Пн–Сб 9:00–19:00</span></div>
+            <div class="td-nav"><span class="td-logo">ОСНОВА<i>.</i></span><nav>Проекты&ensp;·&ensp;Услуги&ensp;·&ensp;Как мы работаем&ensp;·&ensp;Контакты</nav></div>
+            <div class="td-hero">
+              <div class="td-left">
+                <h2>Строительство домов <span>под ключ</span></h2>
+                <p>Проектируем и строим частные дома, коттеджи и коммерческие здания. Фиксируем сроки и стоимость в договоре.</p>
+                <ul class="td-checks">
+                  <li>Проект и смета до начала работ</li>
+                  <li>Собственная бригада и техника</li>
+                  <li>Поэтапная сдача работ с фотоотчётами</li>
+                </ul>
+              </div>
+              <div class="td-photos">
+                <div class="td-ph"></div><div class="td-ph"></div><div class="td-ph"></div><div class="td-ph"></div>
+              </div>
+            </div>
+            <div class="td-band">
+              <div><b>Рассчитаем стоимость вашего дома</b><span>Пришлите проект или опишите задачу — подготовим смету</span></div>
+              <span class="td-btn">Получить расчёт</span>
+            </div>
+          </div></div>
+          <div class="card-body">
+            <span class="tag">Бизнес</span>
+            <h3>Сайт строительной компании</h3>
+            <p>Деловой корпоративный сайт: направления работ, преимущества, заявка на расчёт. Строгая сетка и сдержанная жёлто-синяя гамма.</p>
+            <div class="card-actions">
+              <button class="btn btn-sm" data-view="build">Посмотреть</button>
+              <button class="btn btn-ghost btn-sm" data-order="build">Заказать такой сайт</button>
+            </div>
+          </div>
+        </article>
+
+        <!-- 8. Фитнес-клуб -->
+        <article class="card" data-id="fit" data-cat="sport">
+          <div class="preview"><div class="site tpl-fit">
+            <div class="tf-nav"><span class="tf-logo">ФОРМА<span>.</span></span><nav>Расписание&ensp;·&ensp;Абонементы&ensp;·&ensp;Тренеры&ensp;·&ensp;Контакты</nav></div>
+            <div class="tf-hero">
+              <div class="tf-left">
+                <h2>ТРЕНИРУЙСЯ<br><span>НА СВОИХ</span><br>УСЛОВИЯХ</h2>
+                <p>Зал с современным оборудованием, групповые тренировки и персональные программы под любую цель.</p>
+                <span class="tf-btn">Пробная тренировка</span>
+              </div>
+              <div class="tf-img"></div>
+            </div>
+            <div class="tf-sched">
+              <div class="tf-title">Расписание на неделю</div>
+              <div class="tf-row"><span>Утренняя йога</span><b>ПН · СР · ПТ 8:00</b></div>
+              <div class="tf-row"><span>Кроссфит</span><b>ВТ · ЧТ 19:00</b></div>
+              <div class="tf-row"><span>Силовая группа</span><b>СБ 11:00</b></div>
+            </div>
+          </div></div>
+          <div class="card-body">
+            <span class="tag">Спорт</span>
+            <h3>Сайт фитнес-клуба</h3>
+            <p>Энергичный тёмный дизайн: крупная типографика, расписание тренировок, абонементы. Лаймовый акцент держит внимание и не даёт заскучать.</p>
+            <div class="card-actions">
+              <button class="btn btn-sm" data-view="fit">Посмотреть</button>
+              <button class="btn btn-ghost btn-sm" data-order="fit">Заказать такой сайт</button>
+            </div>
+          </div>
+        </article>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= КАК ЭТО РАБОТАЕТ ================= -->
+  <section id="how">
+    <div class="wrap">
+      <span class="kicker">Процесс</span>
+      <h2 class="section-title">Как это работает</h2>
+      <div class="steps">
+        <div class="step">
+          <div class="step-num">01</div>
+          <h3>Выбираете дизайн</h3>
+          <p>Смотрите шаблоны в витрине и выбираете тот, что подходит вашему бизнесу по стилю и структуре.</p>
+        </div>
+        <div class="step">
+          <div class="step-num">02</div>
+          <h3>Рассказываете о своём бизнесе</h3>
+          <p>Присылаете информацию о компании, услуги, контакты и фотографии — всё, что должно быть на сайте.</p>
+        </div>
+        <div class="step">
+          <div class="step-num">03</div>
+          <h3>Получаете готовый сайт</h3>
+          <p>Шаблон адаптируется под ваш бизнес, проверяется на телефоне и компьютере и передаётся вам.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= ЧТО ВХОДИТ ================= -->
+  <section id="included">
+    <div class="wrap">
+      <span class="kicker">Состав работы</span>
+      <h2 class="section-title">Что входит</h2>
+      <p class="section-sub">В каждый заказ входит стандартный набор работ — без скрытых доплат за базовые вещи.</p>
+      <div class="included-grid">
+        <div class="inc-item"><span class="inc-mark">✓</span><div><b>Адаптивный дизайн</b><span>Сайт корректно выглядит на компьютере, планшете и телефоне.</span></div></div>
+        <div class="inc-item"><span class="inc-mark">✓</span><div><b>Мобильная версия</b><span>Отдельная проверка навигации, кнопок и форм на небольших экранах.</span></div></div>
+        <div class="inc-item"><span class="inc-mark">✓</span><div><b>Базовая настройка</b><span>Счётчик посещений (чтобы видеть, сколько людей заходит на сайт), корректные заголовки страниц.</span></div></div>
+        <div class="inc-item"><span class="inc-mark">✓</span><div><b>Форма связи</b><span>Форма заявки и кнопки мессенджеров, чтобы клиенты могли связаться.</span></div></div>
+        <div class="inc-item"><span class="inc-mark">✓</span><div><b>Изменения под бизнес</b><span>Тексты, цвета, фотографии и структура блоков подстраиваются под вас.</span></div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= ЦЕНЫ / ДОП. УСЛУГИ ================= -->
+  <section id="pricing">
+    <div class="wrap">
+      <span class="kicker">Стоимость</span>
+      <h2 class="section-title">Дополнительные услуги</h2>
+      <p class="section-sub">Основной сайт уже включает готовый дизайн, адаптацию под ваш бизнес и базовую настройку. Ниже — услуги, которые можно добавить к заказу.</p>
+
+      <div class="pricing-grid">
+        <div class="pricing-offer">
+          <span class="po-kicker">Основной оффер</span>
+          <div class="po-name">Готовый сайт для вашего бизнеса</div>
+          <div class="po-price">80 000 ₸</div>
+          <ul class="po-list">
+            <li>Выбор дизайна из готовых шаблонов</li>
+            <li>Адаптация текстов и цветов под бизнес</li>
+            <li>Мобильная версия и адаптивный дизайн</li>
+            <li>Форма заявки и кнопки связи</li>
+            <li>Базовая настройка и проверка</li>
+          </ul>
+          <button class="btn" data-order="">Заказать сайт</button>
+        </div>
+
+        <div class="pricing-list">
+          <details class="price-row">
+            <summary><span>Обработка фотографий</span><span class="dots"></span><b>от 2 000 ₸</b><span class="plus">+</span></summary>
+            <p>Обработаем ваши фотографии для сайта: улучшим качество, уберём фон, скорректируем свет и цвета и приведём изображения к единому стилю.</p>
+          </details>
+          <details class="price-row">
+            <summary><span>Наполнение сайта</span><span class="dots"></span><b>10 000 ₸</b><span class="plus">+</span></summary>
+            <p>Вы отправляете нам информацию, фотографии, цены и другие материалы — мы самостоятельно размещаем всё на сайте и приводим к аккуратному виду.</p>
+          </details>
+          <details class="price-row">
+            <summary><span>Написание текстов</span><span class="dots"></span><b>от 10 000 ₸</b><span class="plus">+</span></summary>
+            <p>Подготовим понятные и привлекательные тексты для вашего сайта: описание компании, услуг, товаров и отдельных разделов.</p>
+          </details>
+          <details class="price-row">
+            <summary><span>Дополнительная страница</span><span class="dots"></span><b>15 000 ₸</b><span class="plus">+</span></summary>
+            <p>Добавим новые страницы под ваши задачи: «О компании», «Услуги», «Контакты», отдельные страницы товаров и другие разделы.</p>
+          </details>
+          <details class="price-row">
+            <summary><span>Каталог товаров</span><span class="dots"></span><b>от 20 000 ₸</b><span class="plus">+</span></summary>
+            <p>Создадим удобный каталог для отображения ваших товаров или услуг с фотографиями, описанием, ценами и необходимой информацией.</p>
+          </details>
+          <details class="price-row">
+            <summary><span>Галерея работ</span><span class="dots"></span><b>10 000 ₸</b><span class="plus">+</span></summary>
+            <p>Покажем ваши работы в аккуратной галерее, чтобы потенциальные клиенты могли быстро ознакомиться с результатами вашей деятельности.</p>
+          </details>
+          <details class="price-row">
+            <summary><span>Подключение домена</span><span class="dots"></span><b>5 000 ₸</b><span class="plus">+</span></summary>
+            <p>Подключим выбранный вами домен к сайту и настроим всё необходимое, чтобы сайт открывался по вашему адресу.</p>
+          </details>
+          <details class="price-row">
+            <summary><span>Поддержка</span><span class="dots"></span><b>10 000 ₸/мес.</b><span class="plus">+</span></summary>
+            <p>Будем следить за работой сайта и при необходимости обновлять информацию, фотографии, цены и другие материалы.</p>
+          </details>
+          <p class="price-note">Цены финальными не являются: итоговая стоимость зависит от объёма работ. Точный расчёт — после обсуждения задачи.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= FAQ ================= -->
+  <section id="faq">
+    <div class="wrap">
+      <span class="kicker">Вопросы и ответы</span>
+      <h2 class="section-title">Частые вопросы</h2>
+      <div class="faq-list">
+        <details class="faq">
+          <summary>Сколько занимает создание сайта?</summary>
+          <p class="faq-a">Обычно несколько дней: вы выбираете шаблон, присылаете тексты и фотографии, а я адаптирую дизайн под ваш бизнес и публикую сайт. Точный срок зависит от того, как быстро будут готовы материалы.</p>
+        </details>
+        <details class="faq">
+          <summary>Можно ли изменить дизайн?</summary>
+          <p class="faq-a">Да. Шаблон — это отправная точка: можно поменять цвета, шрифты, шапку, блоки и структуру страниц под ваши задачи.</p>
+        </details>
+        <details class="faq">
+          <summary>Можно ли добавить свои фотографии?</summary>
+          <p class="faq-a">Конечно. В превью используются заглушки — при заказе они заменяются на фотографии вашего бизнеса. Если своих фото нет, помогу подобрать нейтральные.</p>
+        </details>
+        <details class="faq">
+          <summary>Можно ли подключить домен?</summary>
+          <p class="faq-a">Да. Если у вас уже есть домен, привяжем его к сайту. Если нет — подскажу, где купить, и подключу его за вас (5 000 ₸).</p>
+        </details>
+        <details class="faq">
+          <summary>Будет ли сайт работать на телефоне?</summary>
+          <p class="faq-a">Да, каждый шаблон сверстан адаптивно: навигация, карточки и формы перестраиваются под экран телефона. Перед сдачей сайт проверяется на разных устройствах.</p>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= КОНТАКТЫ ================= -->
+  <section id="contacts">
+    <div class="wrap">
+      <span class="kicker">Контакты</span>
+      <h2>Нужен сайт для бизнеса?</h2>
+      <p class="contacts-sub">Выберите готовый вариант или расскажите, какой сайт вам нужен.</p>
+      <div class="contacts-actions">
+        <a class="btn btn-light" href="#" data-contact="whatsapp" target="_blank" rel="noopener">WhatsApp</a>
+        <a class="btn btn-outline-light" href="#" data-contact="phone">Позвонить</a>
+        <button class="btn btn-outline-light" data-order="">Оставить заявку</button>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="wrap footer-in">
+    <span>© <span id="year"></span> Мастерская сайтов</span>
+    <span>
+      <a href="#" data-contact="email">dako.serk@mail.ru</a>
+    </span>
+  </div>
+</footer>
+
+<!-- ================= МОДАЛЬНОЕ ОКНО: ПРОСМОТР ШАБЛОНА ================= -->
+<div class="overlay" id="viewModal" hidden>
+  <div class="modal modal-view" role="dialog" aria-modal="true" aria-labelledby="mvName">
+    <button class="modal-close" data-close aria-label="Закрыть">✕</button>
+    <div class="mv-grid">
+      <div class="mv-preview" id="mvPreview"></div>
+      <div class="mv-info">
+        <span class="tag" id="mvCat"></span>
+        <h3 id="mvName"></h3>
+        <p class="mv-desc" id="mvDesc"></p>
+        <ul class="mv-features" id="mvFeatures"></ul>
+        <button class="btn" id="mvOrder" data-order="">Заказать этот сайт</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ================= МОДАЛЬНОЕ ОКНО: ЗАЯВКА ================= -->
+<div class="overlay" id="orderModal" hidden>
+  <div class="modal modal-order" role="dialog" aria-modal="true" aria-labelledby="orderTitle">
+    <button class="modal-close" data-close aria-label="Закрыть">✕</button>
+    <div class="order-body">
+      <form id="orderForm" novalidate>
+        <h3 id="orderTitle">Оставить заявку</h3>
+        <p>Заполните форму — и мы свяжемся с вами, чтобы обсудить сайт.</p>
+        <div class="field">
+          <label for="f-name">Имя</label>
+          <input type="text" id="f-name" name="name" required autocomplete="name" placeholder="Как к вам обращаться">
+        </div>
+        <div class="field">
+          <label for="f-contact">Телефон / WhatsApp</label>
+          <input type="text" id="f-contact" name="contact" required placeholder="+7 700 000-00-00 или ник в WhatsApp">
+        </div>
+        <div class="field">
+          <label for="f-site">Какой сайт нужен</label>
+          <input type="text" id="f-site" name="site" required placeholder="Например, сайт кофейни">
+        </div>
+        <div class="field">
+          <label for="f-comment">Комментарий</label>
+          <textarea id="f-comment" name="comment" placeholder="Расскажите о своём бизнесе, пожелания по дизайну и срокам"></textarea>
+        </div>
+        <button type="submit" class="btn">Отправить заявку</button>
+        <p class="order-note">После нажатия откроется WhatsApp с готовым текстом заявки — вам останется нажать «Отправить».</p>
+      </form>
+      <div class="success" id="orderSuccess" hidden>
+        <div class="success-ic">✓</div>
+        <h3>Заявка подготовлена</h3>
+        <p>Заявка подготовлена: откроется WhatsApp с готовым текстом — просто нажмите «Отправить», и заявка придёт нам.
+          Если окно не открылось — напишите нам напрямую:
+          <a href="#" data-contact="whatsapp" target="_blank" rel="noopener">WhatsApp</a>
+          или
+          <a href="#" data-contact="phone">по телефону</a>.
+        </p>
+        <button class="btn btn-ghost btn-sm" data-order="">Отправить ещё одну заявку</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+/* ============================================================
+   НАСТРОЙКИ — ЗАМЕНИТЕ КОНТАКТЫ ЗДЕСЬ (одно место)
+============================================================ */
+const CONTACTS = {
+  whatsapp:  'https://wa.me/77471067769',      // ВАШ WHATSAPP: замените 79000000000 на свой номер
+                                               // в формате 7XXXXXXXXXX (7 + код + номер, без пробелов и плюса)
+  phone:     '+7 747 106-77-69',               // как показывать телефон
+  phoneHref: '+77471067769',                   // телефон для ссылки tel:
+  email:     'dako.serk@mail.ru'               // ваша почта
+};
+
+/* ============================================================
+   ДАННЫЕ ШАБЛОНОВ
+============================================================ */
+const TEMPLATES = {
+  shop: {
+    name: 'Интернет-магазин одежды',
+    cat: 'Магазины',
+    desc: 'Сдержанный магазин одежды с витриной новинок, карточками товаров с ценами и корзиной. Чистая сетка, спокойные цвета, акцент на фотографиях товара.',
+    features: ['Каталог с карточками товаров', 'Корзина и оформление заказа', 'Фильтры по категориям и размеру', 'Страница доставки и оплаты']
+  },
+  barber: {
+    name: 'Сайт барбершопа',
+    cat: 'Услуги',
+    desc: 'Тёмный дерзкий сайт с прайс-листом и онлайн-записью. Жирная типографика и акцентный красный задают характер мужского клуба.',
+    features: ['Прайс-лист с услугами', 'Онлайн-запись через форму', 'Галерея работ мастеров', 'Адрес и часы работы']
+  },
+  rest: {
+    name: 'Сайт ресторана',
+    cat: 'Еда',
+    desc: 'Элегантный сайт ресторана: меню, атмосфера зала, бронирование столика. Приглушённая палитра и серифная типографика создают тон «высокой кухни».',
+    features: ['Меню с ценами и дегустационными сетами', 'Бронирование столика онлайн', 'Галерея блюд и интерьера', 'Карта, часы работы и контакты']
+  },
+  cafe: {
+    name: 'Сайт кофейни',
+    cat: 'Еда',
+    desc: 'Дружелюбный светлый сайт кофейни: круглая композиция, тёплые цвета, меню напитков и режим работы. Выглядит как место, куда хочется зайти.',
+    features: ['Меню напитков и завтраков', 'Режим работы и адрес', 'Блок преимуществ заведения', 'Кнопка «Как добраться»']
+  },
+  auto: {
+    name: 'Сайт автосервиса',
+    cat: 'Услуги',
+    desc: 'Строгий рабочий сайт автосервиса: список услуг, телефон всегда на виду, никаких лишних деталей. Дизайн внушает, что здесь знают своё дело.',
+    features: ['Услуги с описанием работ', 'Заявка на диагностику', 'Телефон и режим записи', 'Информация о гарантиях']
+  },
+  salon: {
+    name: 'Сайт салона красоты',
+    cat: 'Красота',
+    desc: 'Нежный светлый сайт салона: округлые формы, спокойные розовые оттенки, услуги и мастера. Спокойный премиальный тон без вычурности.',
+    features: ['Услуги и цены по направлениям', 'Запись к мастеру онлайн', 'Галерея работ', 'Подарочные сертификаты']
+  },
+  build: {
+    name: 'Сайт строительной компании',
+    cat: 'Бизнес',
+    desc: 'Деловой корпоративный сайт: направления работ, преимущества компании, заявка на расчёт. Строгая сетка и сдержанная жёлто-синяя гамма.',
+    features: ['Направления и этапы работ', 'Заявка на расчёт сметы', 'Галерея реализованных объектов', 'Раздел с документами и договором']
+  },
+  fit: {
+    name: 'Сайт фитнес-клуба',
+    cat: 'Спорт',
+    desc: 'Энергичный тёмный сайт фитнес-клуба: крупная типографика, расписание тренировок, абонементы. Контрастный лаймовый акцент держит внимание.',
+    features: ['Расписание тренировок', 'Абонементы и цены', 'Форма пробной тренировки', 'Страница команды тренеров']
+  }
+};
+
+/* ============================================================
+   УТИЛИТЫ И ПОДСТАНОВКА КОНТАКТОВ
+============================================================ */
+const $  = s => document.querySelector(s);
+const $$ = s => Array.from(document.querySelectorAll(s));
+
+document.getElementById('year').textContent = new Date().getFullYear();
+
+function applyContacts() {
+  $$('[data-contact="whatsapp"]').forEach(a => { a.href = CONTACTS.whatsapp; });
+  $$('[data-contact="phone"]').forEach(a => { a.href = 'tel:' + CONTACTS.phoneHref; });
+  $$('[data-contact="email"]').forEach(a => { a.href = 'mailto:' + CONTACTS.email; });
+  $$('.phone-label').forEach(el => { el.textContent = CONTACTS.phone; });
+}
+applyContacts();
+
+/* ============================================================
+   МАСШТАБИРОВАНИЕ ПРЕВЬЮ (мини-сайты 900×620)
+============================================================ */
+function fitPreviews() {
+  $$('.preview').forEach(p => {
+    p.style.setProperty('--s', p.clientWidth / 900);
+  });
+}
+window.addEventListener('resize', fitPreviews);
+fitPreviews();
+
+/* ============================================================
+   ФИЛЬТРЫ
+============================================================ */
+$$('.chip').forEach(chip => {
+  chip.addEventListener('click', () => {
+    $$('.chip').forEach(c => c.classList.toggle('active', c === chip));
+    const f = chip.dataset.filter;
+    $$('.card').forEach(card => {
+      card.classList.toggle('hidden', f !== 'all' && card.dataset.cat !== f);
+    });
+  });
+});
+
+/* ============================================================
+   МОДАЛЬНЫЕ ОКНА
+============================================================ */
+const viewModal  = $('#viewModal');
+const orderModal = $('#orderModal');
+
+function openModal(m) {
+  closeModals();
+  m.hidden = false;
+  document.body.classList.add('locked');
+  requestAnimationFrame(() => {
+    m.classList.add('show');
+    fitPreviews();
+  });
+}
+function closeModals() {
+  [viewModal, orderModal].forEach(m => {
+    m.classList.remove('show');
+    m.hidden = true;
+  });
+  document.body.classList.remove('locked');
+}
+
+function openView(id) {
+  const t = TEMPLATES[id];
+  if (!t) return;
+  const cardPreview = document.querySelector('.card[data-id="' + id + '"] .preview');
+  if (!cardPreview) return;
+  $('#mvName').textContent = t.name;
+  $('#mvCat').textContent = t.cat;
+  $('#mvDesc').textContent = t.desc;
+  $('#mvFeatures').innerHTML = t.features.map(f => '<li>' + f + '</li>').join('');
+  const holder = $('#mvPreview');
+  holder.innerHTML = '';
+  holder.appendChild(cardPreview.cloneNode(true));
+  $('#mvOrder').dataset.order = id;
+  openModal(viewModal);
+}
+
+function openOrder(preset) {
+  $('#orderForm').hidden = false;
+  $('#orderSuccess').hidden = true;
+  $('#orderForm').reset();
+  $('#f-site').value = preset && TEMPLATES[preset] ? TEMPLATES[preset].name : '';
+  openModal(orderModal);
+  setTimeout(() => { $('#f-name').focus(); }, 220);
+}
+
+/* Делегирование кликов: просмотр / заказ / закрытие */
+document.addEventListener('click', e => {
+  const viewBtn = e.target.closest('[data-view]');
+  if (viewBtn) { openView(viewBtn.dataset.view); return; }
+
+  const orderBtn = e.target.closest('[data-order]');
+  if (orderBtn) { openOrder(orderBtn.dataset.order); return; }
+
+  if (e.target.closest('[data-close]')) { closeModals(); return; }
+
+  if (e.target === viewModal || e.target === orderModal) { closeModals(); return; }
+
+  /* клик по ссылке в мобильном меню закрывает меню */
+  if (e.target.closest('#mainNav a')) {
+    document.getElementById('header').classList.remove('menu-open');
+  }
+});
+
+document.addEventListener('keydown', e => {
+  if (e.key === 'Escape') {
+    closeModals();
+    const h = document.getElementById('header');
+    h.classList.remove('menu-open');
+    $('#navToggle').setAttribute('aria-expanded', 'false');
+  }
+});
+
+/* ============================================================
+   ФОРМА ЗАЯВКИ (без backend — показываем сообщение)
+============================================================ */
+$('#orderForm').addEventListener('submit', e => {
+  e.preventDefault();
+  const form = e.target;
+  if (!form.reportValidity()) return;
+  /* Заявка без backend: открываем WhatsApp с готовым текстом заявки на номер
+     из CONTACTS.whatsapp — клиенту останется нажать «Отправить» в чате */
+  const data = new FormData(form);
+  const text =
+    'Заявка с сайта\n' +
+    'Имя: ' + (data.get('name') || '-') + '\n' +
+    'Связь: ' + (data.get('contact') || '-') + '\n' +
+    'Какой сайт нужен: ' + (data.get('site') || '-') + '\n' +
+    'Комментарий: ' + (data.get('comment') || '-');
+  const waBase = CONTACTS.whatsapp.split('?')[0];
+  window.open(waBase + '?text=' + encodeURIComponent(text), '_blank');
+  form.hidden = true;
+  $('#orderSuccess').hidden = false;
+});
+
+/* ============================================================
+   МОБИЛЬНОЕ МЕНЮ
+============================================================ */
+$('#navToggle').addEventListener('click', () => {
+  const h = document.getElementById('header');
+  const open = h.classList.toggle('menu-open');
+  $('#navToggle').setAttribute('aria-expanded', open ? 'true' : 'false');
+});
+</script>
+</body>
+</html>
