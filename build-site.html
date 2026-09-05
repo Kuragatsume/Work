@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ОСНОВА — строительная компания (демо-сайт)</title>
+<style>
+:root{
+  --bg:#fff;--ink:#16233a;--muted:#5c6b82;--line:#e2e6ec;--yellow:#f2b705;--navy:#16233a;
+  --sans:Arial,Helvetica,sans-serif;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--ink);font-family:var(--sans);font-size:16px;line-height:1.65;-webkit-font-smoothing:antialiased}
+a{color:inherit}
+.wrap{max-width:1080px;margin:0 auto;padding:0 24px}
+section{scroll-margin-top:96px}
+.demo-bar{background:#0f1828;color:#8b9ab5;font-size:12.5px}
+.demo-bar .wrap{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;padding-top:6px;padding-bottom:6px}
+.demo-bar a{color:#8b9ab5;text-decoration:none}
+.demo-bar a:hover{color:#fff}
+.demo-tag{color:#5a6a86;letter-spacing:.12em;text-transform:uppercase;font-size:10px}
+.topbar{background:var(--navy);color:#9fb0c8;font-size:11px;letter-spacing:.1em}
+.topbar .wrap{display:flex;justify-content:space-between;gap:12px;padding-top:8px;padding-bottom:8px;flex-wrap:wrap}
+header{position:sticky;top:0;z-index:40;background:rgba(255,255,255,.97);backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
+.header-in{display:flex;align-items:center;justify-content:space-between;height:60px}
+.logo{font-weight:900;font-size:19px;text-decoration:none}
+.logo i{color:var(--yellow);font-style:normal}
+nav.main{display:flex;gap:22px;align-items:center}
+nav.main a{font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);text-decoration:none}
+nav.main a:hover{color:var(--ink)}
+.nav-toggle{display:none;background:none;border:1px solid var(--line);width:42px;height:42px;position:relative;cursor:pointer}
+.nav-toggle span{position:absolute;left:11px;right:11px;height:2px;background:var(--ink);transition:transform .2s,opacity .2s}
+.nav-toggle span:nth-child(1){top:14px}.nav-toggle span:nth-child(2){top:20px}.nav-toggle span:nth-child(3){top:26px}
+header.menu-open .nav-toggle span:nth-child(1){transform:translateY(6px) rotate(45deg)}
+header.menu-open .nav-toggle span:nth-child(2){opacity:0}
+header.menu-open .nav-toggle span:nth-child(3){transform:translateY(-6px) rotate(-45deg)}
+.hero{padding:60px 0}
+.hero-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:44px;align-items:start}
+.kicker{font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--yellow);font-weight:900;display:block;margin-bottom:14px}
+.hero h1{font-size:clamp(28px,4.2vw,40px);font-weight:900;text-transform:uppercase;line-height:1.15}
+.hero h1 mark{background:var(--yellow);color:var(--ink);padding:0 8px}
+.hero p{color:var(--muted);margin:14px 0 18px;font-size:14.5px}
+.checks{list-style:none;margin-bottom:24px}
+.checks li{padding:6px 0 6px 26px;position:relative;font-weight:700;font-size:14px}
+.checks li::before{content:'';position:absolute;left:0;top:10px;width:13px;height:13px;background:var(--yellow)}
+.btn{display:inline-block;background:var(--navy);color:#fff;border:1px solid var(--navy);padding:15px 30px;font-size:12px;font-weight:900;letter-spacing:.08em;text-transform:uppercase;text-decoration:none;cursor:pointer;font-family:var(--sans)}
+.btn:hover{background:#0e1828}
+.btn-yellow{background:var(--yellow);border-color:var(--yellow);color:var(--ink)}
+.btn-yellow:hover{background:#d9a404;border-color:#d9a404}
+.photos{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.ph{height:120px;background:linear-gradient(160deg,#c7cdd6,#9aa5b4)}
+.ph:nth-child(2){background:linear-gradient(200deg,#aeb6c2,#8792a1)}
+.ph:nth-child(3){background:linear-gradient(180deg,#9aa3b0,#b7bfca)}
+.ph:nth-child(4){background:linear-gradient(140deg,#b3bac5,#7f8a99)}
+.band{margin-top:44px;background:var(--navy);color:#fff;display:flex;align-items:center;justify-content:space-between;gap:16px;padding:24px 28px;flex-wrap:wrap}
+.band b{font-size:17px}
+.band .sub{font-size:12.5px;color:#9fb0c8}
+.section{padding:60px 0;border-top:1px solid var(--line)}
+.section-head{margin-bottom:34px}
+.section-head h2{font-size:clamp(24px,3.2vw,32px);font-weight:900;text-transform:uppercase}
+.section-head p{color:var(--muted);margin-top:8px;max-width:540px;font-size:14.5px}
+.steps-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:26px}
+.step{border-top:3px solid var(--yellow);padding-top:14px}
+.step .num{font-weight:900;color:var(--muted);font-size:12px;letter-spacing:.14em}
+.step h3{font-size:15px;margin:6px 0 6px}
+.step p{font-size:13px;color:var(--muted)}
+.works{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.work{border:1px solid var(--line);padding:20px;display:flex;gap:16px;align-items:flex-start}
+.work .mark{flex:none;width:12px;height:12px;background:var(--yellow);margin-top:5px}
+.work b{display:block;font-size:15px;margin-bottom:4px}
+.work span{font-size:13px;color:var(--muted)}
+.book{background:var(--navy);color:#fff}
+.book .wrap{padding-top:56px;padding-bottom:56px}
+.book-inner{display:grid;grid-template-columns:1fr 1fr;gap:46px;align-items:start}
+.book h2{font-size:clamp(24px,3.2vw,32px);font-weight:900;text-transform:uppercase;margin-bottom:10px}
+.book .sub{color:#9fb0c8;font-size:14.5px}
+.field{margin-bottom:16px}
+.field label{display:block;font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:#9fb0c8;margin-bottom:7px}
+.field input,.field select,.field textarea{width:100%;background:#0f1828;border:1px solid #2a3a55;color:#fff;padding:13px 14px;font-size:15px;font-family:var(--sans);resize:vertical}
+.field input::placeholder,.field textarea::placeholder{color:#5a6a86}
+.field input:focus,.field select:focus,.field textarea:focus{outline:none;border-color:var(--yellow)}
+.field textarea{min-height:80px}
+.field select option{color:var(--ink)}
+.book .btn-yellow{width:100%}
+.form-note{font-size:12px;color:#5a6a86;margin-top:12px}
+footer{padding:24px 0;border-top:1px solid var(--line);font-size:12.5px;color:var(--muted)}
+footer .wrap{display:flex;justify-content:space-between;gap:14px;flex-wrap:wrap}
+footer a{text-decoration:none}
+@media (max-width:860px){
+  nav.main{display:none;position:absolute;top:60px;left:0;right:0;background:#fff;border-bottom:1px solid var(--line);flex-direction:column;align-items:stretch;padding:12px 24px 20px;gap:0}
+  nav.main a{padding:13px 0;border-bottom:1px solid #eef1f5;font-size:13px}
+  header.menu-open nav.main{display:flex}
+  .nav-toggle{display:block}
+}
+@media (max-width:900px){
+  .steps-grid{grid-template-columns:1fr 1fr}
+}
+@media (max-width:760px){
+  .hero{padding:46px 0}
+  .hero-grid{grid-template-columns:1fr;gap:32px}
+  .steps-grid{grid-template-columns:1fr;gap:20px}
+  .works{grid-template-columns:1fr}
+  .book-inner{grid-template-columns:1fr;gap:32px}
+  .section{padding:46px 0}
+}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{transition:none!important}}
+</style>
+</head>
+<body>
+
+<div class="demo-bar">
+  <div class="wrap">
+    <a href="index.html">← Вернуться к витрине шаблонов</a>
+    <span class="demo-tag">Демо-сайт · шаблон «Строительная компания»</span>
+  </div>
+</div>
+
+<div class="topbar">
+  <div class="wrap">
+    <span>Работаем по договору · смета до начала работ</span>
+    <span>Пн–Сб 9:00–19:00</span>
+  </div>
+</div>
+
+<header id="header">
+  <div class="wrap header-in">
+    <a class="logo" href="#top">ОСНОВА<i>.</i></a>
+    <nav class="main" id="mainNav">
+      <a href="#steps">Как мы работаем</a>
+      <a href="#works">Направления</a>
+      <a href="#book">Расчёт</a>
+      <a href="#contacts">Контакты</a>
+    </nav>
+    <button class="nav-toggle" id="navToggle" aria-label="Открыть меню" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</header>
+
+<main id="top">
+
+  <section class="hero">
+    <div class="wrap hero-grid">
+      <div>
+        <span class="kicker">Строительная компания</span>
+        <h1>Строительство домов <mark>под ключ</mark></h1>
+        <p>Проектируем и строим частные дома, коттеджи и коммерческие здания. Фиксируем сроки и стоимость в договоре.</p>
+        <ul class="checks">
+          <li>Проект и смета до начала работ</li>
+          <li>Собственная бригада и техника</li>
+          <li>Поэтапная сдача работ с фотоотчётами</li>
+        </ul>
+        <a class="btn btn-yellow" href="#book">Получить расчёт</a>
+      </div>
+      <div class="photos">
+        <div class="ph"></div><div class="ph"></div><div class="ph"></div><div class="ph"></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="steps">
+    <div class="wrap">
+      <div class="section-head">
+        <h2>Как мы работаем</h2>
+        <p>Прозрачные этапы — вы всегда знаете, что происходит на объекте и что будет дальше.</p>
+      </div>
+      <div class="steps-grid">
+        <div class="step"><span class="num">ЭТАП 01</span><h3>Заявка и выезд</h3><p>Обсуждаем задачу, выезжаем на участок, делаем замеры.</p></div>
+        <div class="step"><span class="num">ЭТАП 02</span><h3>Проект и смета</h3><p>Готовим проект, считаем материалы и фиксируем цену в договоре.</p></div>
+        <div class="step"><span class="num">ЭТАП 03</span><h3>Строительство</h3><p>Ведём работы по этапам, присылаем фотоотчёты каждую неделю.</p></div>
+        <div class="step"><span class="num">ЭТАП 04</span><h3>Сдача объекта</h3><p>Принимаете готовый дом, получаем документы и гарантии.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="works">
+    <div class="wrap">
+      <div class="section-head"><h2>Направления работ</h2></div>
+      <div class="works">
+        <div class="work"><span class="mark"></span><div><b>Частные дома и коттеджи</b><span>Газобетон, кирпич, каркасная технология — от проекта до ключей.</span></div></div>
+        <div class="work"><span class="mark"></span><div><b>Коммерческие здания</b><span>Магазины, склады, офисные здания под ваш бизнес.</span></div></div>
+        <div class="work"><span class="mark"></span><div><b>Фундаменты</b><span>Ленточные, плитные, свайные — с геологией участка.</span></div></div>
+        <div class="work"><span class="mark"></span><div><b>Ремонт и реконструкция</b><span>Усиление конструкций, перепланировка, капремонт зданий.</span></div></div>
+      </div>
+      <div class="band">
+        <div><b>Рассчитаем стоимость вашего объекта</b><span class="sub">Пришлите проект или опишите задачу — подготовим смету за 3 дня</span></div>
+        <a class="btn btn-yellow" href="#book">Получить расчёт</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section book" id="book" style="border-top:none">
+    <div class="wrap">
+      <div class="book-inner">
+        <div>
+          <span class="kicker" style="color:var(--yellow)">Заявка на расчёт</span>
+          <h2>Смета без сюрпризов</h2>
+          <p class="sub">Расскажите об объекте — подготовим предварительную смету и позвоним, чтобы обсудить детали.</p>
+        </div>
+        <form id="bookForm" novalidate>
+          <div class="field"><label for="b-name">Ваше имя</label><input type="text" id="b-name" name="name" required placeholder="Как к вам обращаться"></div>
+          <div class="field"><label for="b-phone">Телефон / WhatsApp</label><input type="text" id="b-phone" name="phone" required placeholder="+7 700 000-00-00"></div>
+          <div class="field"><label for="b-task">Объект</label><select id="b-task" name="task">
+            <option>Частный дом</option><option>Коммерческое здание</option><option>Фундамент</option><option>Ремонт / реконструкция</option>
+          </select></div>
+          <div class="field"><label for="b-info">Коротко о задаче</label><textarea id="b-info" name="info" placeholder="Площадь, регион, сроки"></textarea></div>
+          <button type="submit" class="btn btn-yellow">Получить расчёт</button>
+          <p class="form-note">После нажатия откроется WhatsApp с готовой заявкой — вам останется нажать «Отправить».</p>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="contacts" style="border-top:none">
+    <div class="wrap">
+      <div class="section-head"><h2>Контакты</h2></div>
+      <div class="works" style="max-width:760px">
+        <div class="work"><span class="mark"></span><div><b>Офис</b><span>ул. Заводская, 40, офис 6 · Пн–Сб 9:00–19:00</span></div></div>
+        <div class="work"><span class="mark"></span><div><b>Связь</b><span><a href="tel:+77000000000">+7 700 000-00-00</a> · звонок или WhatsApp</span></div></div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <span>© <span id="year"></span> Строительная компания «Основа» · демо-сайт шаблона</span>
+    <a href="index.html">Витрина шаблонов ←</a>
+  </div>
+</footer>
+
+<script>
+/* КОНТАКТЫ — ЗАМЕНИТЕ НА ДАННЫЕ КЛИЕНТА (формат: 7XXXXXXXXXX) */
+const WHATSAPP = 'https://wa.me/70000000000';
+
+document.getElementById('year').textContent = new Date().getFullYear();
+document.getElementById('navToggle').addEventListener('click', () => {
+  const h = document.getElementById('header');
+  const open = h.classList.toggle('menu-open');
+  document.getElementById('navToggle').setAttribute('aria-expanded', open ? 'true' : 'false');
+});
+document.getElementById('mainNav').addEventListener('click', e => {
+  if (e.target.closest('a')) document.getElementById('header').classList.remove('menu-open');
+});
+document.getElementById('bookForm').addEventListener('submit', e => {
+  e.preventDefault();
+  const form = e.target;
+  if (!form.reportValidity()) return;
+  const data = new FormData(form);
+  const text = 'Заявка на расчёт — «Основа»\nИмя: ' + (data.get('name') || '-') +
+    '\nТелефон: ' + (data.get('phone') || '-') +
+    '\nОбъект: ' + (data.get('task') || '-') +
+    '\nО задаче: ' + (data.get('info') || '-');
+  window.open(WHATSAPP + '?text=' + encodeURIComponent(text), '_blank');
+  const btn = form.querySelector('button[type="submit"]');
+  btn.textContent = 'Открыли WhatsApp — нажмите «Отправить»';
+  setTimeout(() => { btn.textContent = 'Получить расчёт'; }, 4000);
+});
+</script>
+</body>
+</html>

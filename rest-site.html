@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>«Усадьба» — ресторан авторской кухни (демо-сайт)</title>
+<style>
+:root{
+  --paper:#f6f1e7;--green:#22392c;--gold:#b98a2f;--muted:#5d6b58;--line:#ddd3bf;
+  --sans:Arial,Helvetica,sans-serif;--serif:Georgia,"Times New Roman",serif;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{background:var(--paper);color:var(--green);font-family:var(--sans);font-size:16px;line-height:1.65;-webkit-font-smoothing:antialiased}
+a{color:inherit}
+.wrap{max-width:900px;margin:0 auto;padding:0 24px}
+section{scroll-margin-top:90px}
+.demo-bar{background:#ece5d5;border-bottom:1px solid var(--line);font-size:12.5px}
+.demo-bar .wrap{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;padding-top:6px;padding-bottom:6px}
+.demo-bar a{color:var(--muted);text-decoration:none}
+.demo-bar a:hover{color:var(--green)}
+.demo-tag{color:#a49468;letter-spacing:.12em;text-transform:uppercase;font-size:10px}
+header{position:sticky;top:0;z-index:40;background:rgba(246,241,231,.95);backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
+.header-in{display:flex;align-items:center;justify-content:center;position:relative;height:62px}
+.logo{font-family:var(--serif);font-style:italic;font-size:21px;text-decoration:none;position:absolute;left:24px}
+nav.main{display:flex;gap:30px}
+nav.main a{font-family:var(--sans);font-size:10.5px;letter-spacing:.24em;text-transform:uppercase;color:var(--muted);text-decoration:none}
+nav.main a:hover{color:var(--green)}
+.nav-toggle{display:none;background:none;border:1px solid var(--line);width:42px;height:42px;position:absolute;right:24px;cursor:pointer}
+.nav-toggle span{position:absolute;left:11px;right:11px;height:2px;background:var(--green);transition:transform .2s,opacity .2s}
+.nav-toggle span:nth-child(1){top:14px}.nav-toggle span:nth-child(2){top:20px}.nav-toggle span:nth-child(3){top:26px}
+header.menu-open .nav-toggle span:nth-child(1){transform:translateY(6px) rotate(45deg)}
+header.menu-open .nav-toggle span:nth-child(2){opacity:0}
+header.menu-open .nav-toggle span:nth-child(3){transform:translateY(-6px) rotate(-45deg)}
+.hero{text-align:center;padding:64px 0 0}
+.kicker{font-size:10.5px;letter-spacing:.36em;text-transform:uppercase;color:var(--gold);display:block;margin-bottom:12px}
+.hero h1{font-family:var(--serif);font-style:italic;font-weight:400;font-size:clamp(36px,6vw,56px)}
+.hero .lead{color:var(--muted);max-width:460px;margin:14px auto 26px;font-size:14.5px}
+.btn{display:table;margin:0 auto;background:var(--green);color:var(--paper);font-size:10.5px;letter-spacing:.26em;text-transform:uppercase;padding:15px 36px;text-decoration:none;border:1px solid var(--green);cursor:pointer;font-family:var(--sans)}
+.btn:hover{background:#1a2e23;border-color:#1a2e23}
+.hero-img{width:min(620px,100%);height:280px;margin:32px auto 0;background:linear-gradient(160deg,#31473a,#1d2f24);border:8px solid #fff;box-shadow:0 14px 34px rgba(34,57,44,.18)}
+.hero-note{margin:18px 0 8px;font-size:12px;letter-spacing:.18em;text-transform:uppercase;color:#a49468}
+.section{padding:64px 0;border-top:1px solid var(--line);margin-top:56px}
+.section-head{text-align:center;margin-bottom:36px}
+.section-head h2{font-family:var(--serif);font-style:italic;font-weight:400;font-size:clamp(26px,3.4vw,34px)}
+.section-head p{color:var(--muted);max-width:460px;margin:10px auto 0;font-size:14px}
+.menu-list{max-width:620px;margin:0 auto}
+.menu-cat{font-size:10.5px;letter-spacing:.3em;text-transform:uppercase;color:var(--gold);text-align:center;margin:30px 0 8px}
+.menu-item{display:flex;align-items:baseline;border-bottom:1px solid var(--line);padding:13px 2px}
+.menu-item .dots{flex:1;border-bottom:1px dotted #c9bd9f;margin:0 12px;min-width:20px}
+.menu-item b{font-family:var(--serif);font-weight:400;color:var(--gold);white-space:nowrap}
+.menu-item .m-name{font-size:15px}
+.menu-item .m-sub{display:block;font-size:12px;color:var(--muted);margin-top:2px}
+.feat-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:28px;margin-top:10px}
+.feat{text-align:center;padding:0 12px}
+.feat h3{font-family:var(--serif);font-style:italic;font-weight:400;font-size:19px;margin-bottom:8px}
+.feat p{font-size:13.5px;color:var(--muted)}
+.book{background:var(--green);color:var(--paper)}
+.book .wrap{padding-top:60px;padding-bottom:60px}
+.book h2{font-family:var(--serif);font-style:italic;font-weight:400;font-size:clamp(26px,3.4vw,34px);text-align:center}
+.book .sub{text-align:center;color:#b9c8b4;max-width:420px;margin:12px auto 34px;font-size:14px}
+.field{max-width:420px;margin:0 auto 16px}
+.field label{display:block;font-size:10px;letter-spacing:.22em;text-transform:uppercase;color:#b9c8b4;margin-bottom:7px}
+.field input,.field select{width:100%;background:rgba(246,241,231,.08);border:1px solid rgba(246,241,231,.25);color:var(--paper);padding:13px 14px;font-size:15px;font-family:var(--sans)}
+.field input::placeholder{color:#8fa192}
+.field input:focus,.field select:focus{outline:none;border-color:var(--gold)}
+.field select option{color:var(--green)}
+.book .btn{margin-top:6px}
+.form-note{text-align:center;font-size:12px;color:#8fa192;margin-top:14px}
+footer{padding:26px 24px;border-top:1px solid var(--line);font-size:12px;color:var(--muted)}
+footer .fin{max-width:900px;margin:0 auto;display:flex;justify-content:space-between;gap:14px;flex-wrap:wrap}
+footer a{text-decoration:none}
+@media (max-width:860px){
+  nav.main{display:none;position:absolute;top:62px;left:0;right:0;background:var(--paper);border-bottom:1px solid var(--line);flex-direction:column;align-items:stretch;padding:12px 24px 20px;gap:0}
+  nav.main a{padding:13px 0;border-bottom:1px solid var(--line);font-size:12px;text-align:center;letter-spacing:.18em}
+  header.menu-open nav.main{display:flex}
+  .nav-toggle{display:block}
+  .logo{position:static}
+  .header-in{justify-content:space-between}
+}
+@media (max-width:760px){
+  .hero{padding:48px 0 0}
+  .hero-img{height:200px}
+  .feat-grid{grid-template-columns:1fr;gap:26px}
+  .section{padding:48px 0;margin-top:44px}
+  .book .wrap{padding-top:48px;padding-bottom:48px}
+}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{transition:none!important}}
+</style>
+</head>
+<body>
+
+<div class="demo-bar">
+  <div class="wrap">
+    <a href="index.html">← Вернуться к витрине шаблонов</a>
+    <span class="demo-tag">Демо-сайт · шаблон «Ресторан»</span>
+  </div>
+</div>
+
+<header id="header">
+  <div class="wrap header-in">
+    <a class="logo" href="#top">«Усадьба»</a>
+    <nav class="main" id="mainNav">
+      <a href="#menu">Меню</a>
+      <a href="#about">О нас</a>
+      <a href="#book">Бронирование</a>
+      <a href="#contacts">Контакты</a>
+    </nav>
+    <button class="nav-toggle" id="navToggle" aria-label="Открыть меню" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</header>
+
+<main id="top">
+
+  <section class="hero">
+    <div class="wrap">
+      <span class="kicker">Ресторан авторской кухни</span>
+      <h1>«Усадьба»</h1>
+      <p class="lead">Сезонные продукты, открытая кухня и винная карта. Ужин, ради которого стоит задержаться в городе.</p>
+      <a class="btn" href="#book">Забронировать столик</a>
+      <div class="hero-img"></div>
+      <p class="hero-note">Среда — воскресенье · 17:00 — 00:00 · ул. Садовая, 4</p>
+    </div>
+  </section>
+
+  <section class="section" id="menu">
+    <div class="wrap">
+      <div class="section-head">
+        <h2>Меню</h2>
+        <p>Кухня меняется четыре раза в год — вместе с продуктами сезона. Ниже — позиции текущего меню.</p>
+      </div>
+      <div class="menu-list">
+        <div class="menu-cat">Закуски</div>
+        <div class="menu-item"><span class="m-name">Тартар из говядины<span class="m-sub">Перепелиное яйцо, тосты</span></span><span class="dots"></span><b>2 400 ₸</b></div>
+        <div class="menu-item"><span class="m-name">Салат с уткой<span class="m-sub">Груша, орех, мёд</span></span><span class="dots"></span><b>2 100 ₸</b></div>
+        <div class="menu-cat">Основные блюда</div>
+        <div class="menu-item"><span class="m-name">Утиная ножка<span class="m-sub">Пюре из сельдерея</span></span><span class="dots"></span><b>3 600 ₸</b></div>
+        <div class="menu-item"><span class="m-name">Ризотто с белыми грибами<span class="m-sub">Пармезан, трюфельное масло</span></span><span class="dots"></span><b>2 800 ₸</b></div>
+        <div class="menu-cat">Дегустация</div>
+        <div class="menu-item"><span class="m-name">Сет шефа<span class="m-sub">Пять блюд на выбор кухни</span></span><span class="dots"></span><b>7 900 ₸</b></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="about">
+    <div class="wrap">
+      <div class="section-head"><h2>Об атмосфере</h2></div>
+      <div class="feat-grid">
+        <div class="feat"><h3>Сезонная кухня</h3><p>Меню строим вокруг продуктов, которые доступны здесь и сейчас — от местных фермеров.</p></div>
+        <div class="feat"><h3>Открытая кухня</h3><p>Гости видят, как готовят их блюда. Для нас это честность, для вас — маленькое шоу.</p></div>
+        <div class="feat"><h3>Тихий вечер</h3><p>Мягкий свет, живое пианино по пятницам и столики, где можно говорить негромко.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section book" id="book" style="border-top:none">
+    <div class="wrap">
+      <h2>Бронирование столика</h2>
+      <p class="sub">Оставьте заявку — перезвоним и подтвердим бронь. Столик держим 20 минут от времени брони.</p>
+      <form id="bookForm" novalidate>
+        <div class="field"><label for="b-name">Ваше имя</label><input type="text" id="b-name" name="name" required placeholder="Как к вам обращаться"></div>
+        <div class="field"><label for="b-phone">Телефон / WhatsApp</label><input type="text" id="b-phone" name="phone" required placeholder="+7 700 000-00-00"></div>
+        <div class="field"><label for="b-when">Когда и сколько гостей</label><input type="text" id="b-when" name="when" placeholder="Например: суббота, 19:00, 4 гостя"></div>
+        <button type="submit" class="btn">Забронировать</button>
+        <p class="form-note">После нажатия откроется WhatsApp с готовой заявкой — вам останется нажать «Отправить».</p>
+      </form>
+    </div>
+  </section>
+
+  <section class="section" id="contacts" style="margin-top:0">
+    <div class="wrap">
+      <div class="section-head"><h2>Контакты</h2></div>
+      <div class="feat-grid">
+        <div class="feat"><h3>Адрес</h3><p>ул. Садовая, 4, исторический центр</p></div>
+        <div class="feat"><h3>Часы</h3><p>Среда — воскресенье, 17:00 — 00:00</p></div>
+        <div class="feat"><h3>Связь</h3><p><a href="tel:+77000000000">+7 700 000-00-00</a></p></div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="fin">
+    <span>© <span id="year"></span> Ресторан «Усадьба» · демо-сайт шаблона</span>
+    <a href="index.html">Витрина шаблонов ←</a>
+  </div>
+</footer>
+
+<script>
+/* КОНТАКТЫ — ЗАМЕНИТЕ НА ДАННЫЕ КЛИЕНТА (формат: 7XXXXXXXXXX) */
+const WHATSAPP = 'https://wa.me/70000000000';
+
+document.getElementById('year').textContent = new Date().getFullYear();
+document.getElementById('navToggle').addEventListener('click', () => {
+  const h = document.getElementById('header');
+  const open = h.classList.toggle('menu-open');
+  document.getElementById('navToggle').setAttribute('aria-expanded', open ? 'true' : 'false');
+});
+document.getElementById('mainNav').addEventListener('click', e => {
+  if (e.target.closest('a')) document.getElementById('header').classList.remove('menu-open');
+});
+document.getElementById('bookForm').addEventListener('submit', e => {
+  e.preventDefault();
+  const form = e.target;
+  if (!form.reportValidity()) return;
+  const data = new FormData(form);
+  const text = 'Бронь столика — «Усадьба»\nИмя: ' + (data.get('name') || '-') +
+    '\nТелефон: ' + (data.get('phone') || '-') +
+    '\nКогда и сколько гостей: ' + (data.get('when') || '-');
+  window.open(WHATSAPP + '?text=' + encodeURIComponent(text), '_blank');
+  const btn = form.querySelector('button[type="submit"]');
+  btn.textContent = 'Открыли WhatsApp — нажмите «Отправить»';
+  setTimeout(() => { btn.textContent = 'Забронировать'; }, 4000);
+});
+</script>
+</body>
+</html>

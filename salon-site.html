@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>«Мира» — студия красоты (демо-сайт)</title>
+<style>
+:root{
+  --bg:#fdf5f6;--ink:#46343a;--muted:#a08890;--rose:#c4788b;--card:#fff;--line:#f0dee2;
+  --sans:Arial,Helvetica,sans-serif;--serif:Georgia,"Times New Roman",serif;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--ink);font-family:var(--sans);font-size:16px;line-height:1.7;-webkit-font-smoothing:antialiased}
+a{color:inherit}
+.wrap{max-width:960px;margin:0 auto;padding:0 24px}
+section{scroll-margin-top:90px}
+.demo-bar{background:#f7e9ec;border-bottom:1px solid var(--line);font-size:12.5px}
+.demo-bar .wrap{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;padding-top:6px;padding-bottom:6px}
+.demo-bar a{color:var(--muted);text-decoration:none}
+.demo-bar a:hover{color:var(--ink)}
+.demo-tag{color:#c9a4ae;letter-spacing:.12em;text-transform:uppercase;font-size:10px}
+header{position:sticky;top:0;z-index:40;background:rgba(253,245,246,.95);backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
+.header-in{display:flex;align-items:center;justify-content:space-between;height:66px}
+.logo{font-family:var(--serif);font-style:italic;font-size:21px;text-decoration:none}
+nav.main{display:flex;gap:24px;align-items:center}
+nav.main a{font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--muted);text-decoration:none}
+nav.main a:hover{color:var(--ink)}
+.nav-toggle{display:none;background:none;border:1px solid var(--line);width:42px;height:42px;position:relative;cursor:pointer}
+.nav-toggle span{position:absolute;left:11px;right:11px;height:2px;background:var(--ink);transition:transform .2s,opacity .2s}
+.nav-toggle span:nth-child(1){top:14px}.nav-toggle span:nth-child(2){top:20px}.nav-toggle span:nth-child(3){top:26px}
+header.menu-open .nav-toggle span:nth-child(1){transform:translateY(6px) rotate(45deg)}
+header.menu-open .nav-toggle span:nth-child(2){opacity:0}
+header.menu-open .nav-toggle span:nth-child(3){transform:translateY(-6px) rotate(-45deg)}
+.hero{text-align:center;padding:64px 0}
+.kicker{font-size:10px;letter-spacing:.42em;text-transform:uppercase;color:var(--rose);display:block;margin-bottom:14px}
+.hero h1{font-family:var(--serif);font-style:italic;font-weight:400;font-size:clamp(30px,4.8vw,44px)}
+.hero p{color:#8d747c;max-width:440px;margin:16px auto 26px;font-size:14.5px}
+.btn{display:inline-block;background:var(--ink);color:#fdf5f6;border:1px solid var(--ink);border-radius:999px;padding:14px 34px;font-size:11px;letter-spacing:.2em;text-transform:uppercase;text-decoration:none;cursor:pointer;font-family:var(--sans)}
+.btn:hover{background:var(--rose);border-color:var(--rose)}
+.hero-img{width:min(620px,100%);height:230px;margin:34px auto 0;border-radius:115px;background:linear-gradient(140deg,#f2c7d3,#dfa4b6 60%,#d395a8)}
+.hero-note{margin-top:18px;font-size:12.5px;color:var(--muted)}
+.section{padding:60px 0;border-top:1px solid var(--line)}
+.section-head{text-align:center;margin-bottom:36px}
+.section-head h2{font-family:var(--serif);font-style:italic;font-weight:400;font-size:clamp(26px,3.4vw,34px)}
+.section-head p{color:var(--muted);max-width:440px;margin:10px auto 0;font-size:14px}
+.services{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
+.svc{background:var(--card);border-radius:20px;padding:26px 22px;text-align:center;box-shadow:0 10px 24px rgba(196,140,160,.12)}
+.svc .ic{width:46px;height:46px;border-radius:50%;margin:0 auto 14px;background:linear-gradient(140deg,#f2c7d3,#dfa4b6)}
+.svc h3{font-family:var(--serif);font-style:italic;font-weight:400;font-size:19px;margin-bottom:8px}
+.svc p{font-size:13px;color:var(--muted);margin-bottom:12px}
+.svc .price{font-family:var(--serif);font-size:15px;color:var(--rose)}
+.price-rows{max-width:560px;margin:40px auto 0}
+.price-row{display:flex;align-items:baseline;padding:12px 2px;border-bottom:1px solid var(--line);font-size:14px}
+.price-row .dots{flex:1;border-bottom:1px dotted #dcc0c8;margin:0 12px}
+.price-row b{font-family:var(--serif);font-weight:400;color:var(--rose);white-space:nowrap}
+.book{background:var(--card)}
+.book .wrap{padding-top:56px;padding-bottom:56px}
+.book-inner{display:grid;grid-template-columns:1fr 1fr;gap:46px;align-items:start}
+.book h2{font-family:var(--serif);font-style:italic;font-weight:400;font-size:clamp(24px,3.2vw,32px);margin-bottom:10px}
+.book .sub{color:var(--muted);font-size:14.5px}
+.field{margin-bottom:16px}
+.field label{display:block;font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin-bottom:7px}
+.field input,.field select{width:100%;border:1px solid var(--line);border-radius:12px;background:#fdf5f6;padding:13px 14px;font-size:15px;font-family:var(--sans);color:var(--ink)}
+.field input:focus,.field select:focus{outline:none;border-color:var(--rose)}
+.book .btn{width:100%}
+.form-note{font-size:12px;color:var(--muted);margin-top:12px}
+footer{padding:24px 0;border-top:1px solid var(--line);font-size:12.5px;color:var(--muted)}
+footer .wrap{display:flex;justify-content:space-between;gap:14px;flex-wrap:wrap}
+footer a{text-decoration:none}
+@media (max-width:860px){
+  nav.main{display:none;position:absolute;top:66px;left:0;right:0;background:#fff;border-bottom:1px solid var(--line);flex-direction:column;align-items:stretch;padding:12px 24px 20px;gap:0}
+  nav.main a{padding:13px 0;border-bottom:1px solid #f7eef0;font-size:13px}
+  header.menu-open nav.main{display:flex}
+  .nav-toggle{display:block}
+}
+@media (max-width:760px){
+  .hero{padding:48px 0}
+  .hero-img{height:160px;border-radius:80px}
+  .services{grid-template-columns:1fr}
+  .book-inner{grid-template-columns:1fr;gap:32px}
+  .section{padding:46px 0}
+}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{transition:none!important}}
+</style>
+</head>
+<body>
+
+<div class="demo-bar">
+  <div class="wrap">
+    <a href="index.html">← Вернуться к витрине шаблонов</a>
+    <span class="demo-tag">Демо-сайт · шаблон «Салон красоты»</span>
+  </div>
+</div>
+
+<header id="header">
+  <div class="wrap header-in">
+    <a class="logo" href="#top">Мира</a>
+    <nav class="main" id="mainNav">
+      <a href="#services">Услуги</a>
+      <a href="#prices">Цены</a>
+      <a href="#book">Запись</a>
+      <a href="#contacts">Контакты</a>
+    </nav>
+    <button class="nav-toggle" id="navToggle" aria-label="Открыть меню" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</header>
+
+<main id="top">
+
+  <section class="hero">
+    <div class="wrap">
+      <span class="kicker">Студия красоты</span>
+      <h1>Спокойная красота каждый день</h1>
+      <p>Стрижки, уход и ногтевой сервис в тихом пространстве с естественным светом. Работаем по записи — вас ждут.</p>
+      <a class="btn" href="#book">Записаться онлайн</a>
+      <div class="hero-img"></div>
+      <p class="hero-note">Вт–Вс 9:00–20:00 · пр. Мира, 18, кабинет 3</p>
+    </div>
+  </section>
+
+  <section class="section" id="services">
+    <div class="wrap">
+      <div class="section-head">
+        <h2>Направления</h2>
+        <p>Три направления — и каждое делает мастер, который занимается только им.</p>
+      </div>
+      <div class="services">
+        <div class="svc"><div class="ic"></div><h3>Стрижки</h3><p>Женские и мужские стрижки, укладки, уход за волосами.</p><span class="price">от 3 000 ₸</span></div>
+        <div class="svc"><div class="ic"></div><h3>Уход</h3><p>Чистки, пилинги и домашние рекомендации от косметолога.</p><span class="price">от 6 000 ₸</span></div>
+        <div class="svc"><div class="ic"></div><h3>Ногти</h3><p>Маникюр и педикюр в стерильных условиях, покрытие гель-лаком.</p><span class="price">от 4 500 ₸</span></div>
+      </div>
+      <div class="price-rows" id="prices">
+        <div class="price-row"><span>Женская стрижка</span><span class="dots"></span><b>4 500 ₸</b></div>
+        <div class="price-row"><span>Мужская стрижка</span><span class="dots"></span><b>3 000 ₸</b></div>
+        <div class="price-row"><span>Окрашивание в один тон</span><span class="dots"></span><b>от 9 000 ₸</b></div>
+        <div class="price-row"><span>Комбинированный маникюр с покрытием</span><span class="dots"></span><b>5 500 ₸</b></div>
+        <div class="price-row"><span>Чистка лица</span><span class="dots"></span><b>от 7 000 ₸</b></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" style="border-top:none;padding-top:0">
+    <div class="wrap">
+      <div class="section-head"><h2>Почему «Мира»</h2></div>
+      <div class="services">
+        <div class="svc"><div class="ic"></div><h3>По записи</h3><p>Никаких очередей: вы приходите к своему времени, мастер занят только вами.</p></div>
+        <div class="svc"><div class="ic"></div><h3>Честные консультации</h3><p>Не навязываем лишнего: посоветуем то, что подойдёт именно вам.</p></div>
+        <div class="svc"><div class="ic"></div><h3>Стерильность</h3><p>Инструменты проходят полный цикл обработки, расходники — одноразовые.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section book" id="book" style="border-top:none;border-radius:28px 28px 0 0">
+    <div class="wrap">
+      <div class="book-inner">
+        <div>
+          <h2>Запишитесь к мастеру</h2>
+          <p class="sub">Оставьте заявку — перезвоним, подскажем свободное время и ответим на вопросы.</p>
+        </div>
+        <form id="bookForm" novalidate>
+          <div class="field"><label for="b-name">Ваше имя</label><input type="text" id="b-name" name="name" required placeholder="Как к вам обращаться"></div>
+          <div class="field"><label for="b-phone">Телефон / WhatsApp</label><input type="text" id="b-phone" name="phone" required placeholder="+7 700 000-00-00"></div>
+          <div class="field"><label for="b-svc">Услуга</label><select id="b-svc" name="svc">
+            <option>Стрижка</option><option>Окрашивание</option><option>Уход / косметолог</option><option>Маникюр</option><option>Педикюр</option>
+          </select></div>
+          <button type="submit" class="btn">Записаться</button>
+          <p class="form-note">После нажатия откроется WhatsApp с готовой заявкой — вам останется нажать «Отправить».</p>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="contacts" style="border-top:none;padding-top:20px">
+    <div class="wrap">
+      <div class="section-head"><h2>Контакты</h2></div>
+      <div class="services">
+        <div class="svc"><h3>Адрес</h3><p>пр. Мира, 18, кабинет 3, второй этаж</p></div>
+        <div class="svc"><h3>Часы</h3><p>Вторник — воскресенье, 9:00–20:00</p></div>
+        <div class="svc"><h3>Связь</h3><p><a href="tel:+77000000000">+7 700 000-00-00</a></p></div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <span>© <span id="year"></span> Студия красоты «Мира» · демо-сайт шаблона</span>
+    <a href="index.html">Витрина шаблонов ←</a>
+  </div>
+</footer>
+
+<script>
+/* КОНТАКТЫ — ЗАМЕНИТЕ НА ДАННЫЕ КЛИЕНТА (формат: 7XXXXXXXXXX) */
+const WHATSAPP = 'https://wa.me/70000000000';
+
+document.getElementById('year').textContent = new Date().getFullYear();
+document.getElementById('navToggle').addEventListener('click', () => {
+  const h = document.getElementById('header');
+  const open = h.classList.toggle('menu-open');
+  document.getElementById('navToggle').setAttribute('aria-expanded', open ? 'true' : 'false');
+});
+document.getElementById('mainNav').addEventListener('click', e => {
+  if (e.target.closest('a')) document.getElementById('header').classList.remove('menu-open');
+});
+document.getElementById('bookForm').addEventListener('submit', e => {
+  e.preventDefault();
+  const form = e.target;
+  if (!form.reportValidity()) return;
+  const data = new FormData(form);
+  const text = 'Запись в студию «Мира»\nИмя: ' + (data.get('name') || '-') +
+    '\nТелефон: ' + (data.get('phone') || '-') +
+    '\nУслуга: ' + (data.get('svc') || '-');
+  window.open(WHATSAPP + '?text=' + encodeURIComponent(text), '_blank');
+  const btn = form.querySelector('button[type="submit"]');
+  btn.textContent = 'Открыли WhatsApp — нажмите «Отправить»';
+  setTimeout(() => { btn.textContent = 'Записаться'; }, 4000);
+});
+</script>
+</body>
+</html>

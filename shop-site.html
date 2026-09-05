@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ATELIER 12 — интернет-магазин одежды (демо-сайт)</title>
+<style>
+:root{
+  --ink:#191817;--muted:#7a756c;--line:#e8e4dd;--paper:#fff;
+  --sans:Arial,Helvetica,sans-serif;--serif:Georgia,"Times New Roman",serif;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{background:#fff;color:var(--ink);font-family:var(--sans);font-size:16px;line-height:1.65;-webkit-font-smoothing:antialiased}
+a{color:inherit}
+.wrap{max-width:1080px;margin:0 auto;padding:0 24px}
+section{scroll-margin-top:90px}
+.demo-bar{background:#f4f1ec;border-bottom:1px solid var(--line);font-size:12.5px}
+.demo-bar .wrap{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;padding-top:6px;padding-bottom:6px}
+.demo-bar a{color:var(--muted);text-decoration:none}
+.demo-bar a:hover{color:var(--ink)}
+.demo-tag{color:#a39b8d;letter-spacing:.12em;text-transform:uppercase;font-size:10px}
+header{position:sticky;top:0;z-index:40;background:rgba(255,255,255,.95);backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
+.header-in{display:flex;align-items:center;justify-content:space-between;height:66px}
+.logo{font-family:var(--serif);font-size:19px;letter-spacing:.32em;font-weight:700;text-decoration:none}
+nav.main{display:flex;gap:24px;align-items:center}
+nav.main a{font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);text-decoration:none}
+nav.main a:hover{color:var(--ink)}
+.cart-link{font-size:11px;letter-spacing:.1em;border:1px solid var(--ink);padding:7px 14px;text-decoration:none}
+.nav-toggle{display:none;background:none;border:1px solid var(--line);width:42px;height:42px;position:relative;cursor:pointer}
+.nav-toggle span{position:absolute;left:11px;right:11px;height:2px;background:var(--ink);transition:transform .2s,opacity .2s}
+.nav-toggle span:nth-child(1){top:14px}.nav-toggle span:nth-child(2){top:20px}.nav-toggle span:nth-child(3){top:26px}
+header.menu-open .nav-toggle span:nth-child(1){transform:translateY(6px) rotate(45deg)}
+header.menu-open .nav-toggle span:nth-child(2){opacity:0}
+header.menu-open .nav-toggle span:nth-child(3){transform:translateY(-6px) rotate(-45deg)}
+.hero{padding:70px 0}
+.kicker{font-family:var(--sans);font-size:10px;letter-spacing:.3em;text-transform:uppercase;color:#a39b8d;display:block;margin-bottom:14px}
+.hero h1{font-family:var(--serif);font-weight:400;font-size:clamp(30px,4.6vw,46px);line-height:1.2;max-width:560px}
+.hero p{color:var(--muted);margin:16px 0 26px;max-width:420px;font-size:14.5px}
+.btn{display:inline-block;background:var(--ink);color:#fff;font-size:11px;letter-spacing:.16em;text-transform:uppercase;padding:14px 28px;text-decoration:none;border:1px solid var(--ink);cursor:pointer;font-family:var(--sans)}
+.btn:hover{background:#3a3630;border-color:#3a3630}
+.btn-ghost{background:transparent;color:var(--ink)}
+.btn-ghost:hover{background:var(--ink);color:#fff}
+.hero-note{margin-top:16px;font-size:12.5px;color:#a39b8d}
+.section{padding:64px 0;border-top:1px solid var(--line)}
+.section-head{display:flex;justify-content:space-between;align-items:baseline;gap:16px;margin-bottom:34px;flex-wrap:wrap}
+.section-head h2{font-family:var(--serif);font-weight:400;font-size:clamp(24px,3vw,32px)}
+.section-head span{font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--muted)}
+.products{display:grid;grid-template-columns:repeat(3,1fr);gap:26px}
+.product .ph{height:300px}
+.ph1{background:linear-gradient(180deg,#cfc6b8,#a89b86)}
+.ph2{background:linear-gradient(180deg,#b9bdb9,#8e948f)}
+.ph3{background:linear-gradient(180deg,#d8c9c0,#b09a8e)}
+.ph4{background:linear-gradient(180deg,#c5b8ab,#97897a)}
+.ph5{background:linear-gradient(180deg,#aab3b8,#7e888d)}
+.ph6{background:linear-gradient(180deg,#d3c2b6,#a68d80)}
+.product .row{display:flex;justify-content:space-between;align-items:baseline;margin-top:12px;font-size:13.5px}
+.product .row b{font-family:var(--serif);font-size:15px}
+.product .p-sub{display:block;font-size:12px;color:var(--muted);margin-top:2px}
+.feat-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:32px}
+.feat{border-top:1px solid var(--ink);padding-top:16px}
+.feat h3{font-family:var(--serif);font-weight:400;font-size:18px;margin-bottom:8px}
+.feat p{font-size:13.5px;color:var(--muted)}
+.order{background:#faf8f4}
+.order-inner{display:grid;grid-template-columns:1fr 1fr;gap:50px;align-items:start}
+.order h2{font-family:var(--serif);font-weight:400;font-size:clamp(24px,3vw,32px);margin-bottom:12px}
+.order .sub{color:var(--muted);font-size:14.5px}
+.field{margin-bottom:16px}
+.field label{display:block;font-size:10.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);margin-bottom:7px}
+.field input,.field select{width:100%;border:1px solid var(--line);background:#fff;padding:13px 14px;font-size:15px;font-family:var(--sans);color:var(--ink)}
+.field input:focus,.field select:focus{outline:none;border-color:var(--ink)}
+.order .btn{width:100%}
+.form-note{font-size:12px;color:#a39b8d;margin-top:12px}
+footer{padding:24px 0;border-top:1px solid var(--line);font-size:12px;color:var(--muted);letter-spacing:.14em;text-transform:uppercase}
+footer .wrap{display:flex;justify-content:space-between;gap:14px;flex-wrap:wrap}
+footer a{text-decoration:none}
+@media (max-width:860px){
+  nav.main{display:none;position:absolute;top:66px;left:0;right:0;background:#fff;border-bottom:1px solid var(--line);flex-direction:column;align-items:stretch;padding:12px 24px 20px;gap:0}
+  nav.main a,.cart-link{padding:13px 0;border-bottom:1px solid var(--line);font-size:13px;letter-spacing:.08em}
+  nav.main .cart-link{border-bottom:none;border-left:none;border-right:none;border-top:none;text-align:left}
+  header.menu-open nav.main{display:flex}
+  .nav-toggle{display:block}
+}
+@media (max-width:760px){
+  .hero{padding:52px 0}
+  .products{grid-template-columns:1fr 1fr;gap:18px}
+  .product .ph{height:210px}
+  .feat-grid{grid-template-columns:1fr;gap:24px}
+  .order-inner{grid-template-columns:1fr;gap:34px}
+  .section{padding:48px 0}
+}
+@media (max-width:430px){
+  .products{grid-template-columns:1fr}
+  .product .ph{height:280px}
+}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{transition:none!important}}
+</style>
+</head>
+<body>
+
+<div class="demo-bar">
+  <div class="wrap">
+    <a href="index.html">← Вернуться к витрине шаблонов</a>
+    <span class="demo-tag">Демо-сайт · шаблон «Магазин одежды»</span>
+  </div>
+</div>
+
+<header id="header">
+  <div class="wrap header-in">
+    <a class="logo" href="#top">ATELIER 12</a>
+    <nav class="main" id="mainNav">
+      <a href="#catalog">Новинки</a>
+      <a href="#catalog">Женское</a>
+      <a href="#catalog">Мужское</a>
+      <a href="#order">Доставка</a>
+      <a class="cart-link" href="#order">Корзина (0)</a>
+    </nav>
+    <button class="nav-toggle" id="navToggle" aria-label="Открыть меню" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</header>
+
+<main id="top">
+
+  <section class="hero">
+    <div class="wrap">
+      <span class="kicker">Коллекция · весна</span>
+      <h1>Одежда, которая останется в гардеробе</h1>
+      <p>Лаконичные силуэты, натуральные ткани и спокойные цвета. Вещи, которые легко сочетать между собой и носить не один сезон.</p>
+      <a class="btn" href="#catalog">Смотреть каталог</a>
+      <a class="btn btn-ghost" href="#order" style="margin-left:10px">Подобрать образ</a>
+      <p class="hero-note">Доставка по всей стране · возврат 30 дней</p>
+    </div>
+  </section>
+
+  <section class="section" id="catalog">
+    <div class="wrap">
+      <div class="section-head"><h2>Новинки</h2><span>6 позиций</span></div>
+      <div class="products">
+        <div class="product"><div class="ph ph1"></div><div class="row"><span>Пальто «Осло»<span class="p-sub">Шерсть, оверсайз</span></span><b>29 900 ₸</b></div></div>
+        <div class="product"><div class="ph ph2"></div><div class="row"><span>Костюм «Линия»<span class="p-sub">Пиджак и брюки</span></span><b>24 500 ₸</b></div></div>
+        <div class="product"><div class="ph ph3"></div><div class="row"><span>Платье «Мюре»<span class="p-sub">Вискоза, миди</span></span><b>18 900 ₸</b></div></div>
+        <div class="product"><div class="ph ph4"></div><div class="row"><span>Рубашка «Кроно»<span class="p-sub">Хлопок, свободный крой</span></span><b>12 400 ₸</b></div></div>
+        <div class="product"><div class="ph ph5"></div><div class="row"><span>Брюки «Строй»<span class="p-sub">Прямые, высокая посадка</span></span><b>14 900 ₸</b></div></div>
+        <div class="product"><div class="ph ph6"></div><div class="row"><span>Кардиган «Норд»<span class="p-sub">Крупная вязка</span></span><b>21 000 ₸</b></div></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap">
+      <div class="section-head"><h2>Почему у нас удобно покупать</h2></div>
+      <div class="feat-grid">
+        <div class="feat"><h3>Доставка по всей стране</h3><p>Отправляем заказы в день оформления. Примерка при получении — платите только за то, что подошло.</p></div>
+        <div class="feat"><h3>Возврат 30 дней</h3><p>Если размер или цвет не подошли, вернём деньги в течение месяца без лишних вопросов.</p></div>
+        <div class="feat"><h3>Помощь с размером</h3><p>Напишите нам параметры — подскажем размер и посадку конкретной модели до заказа.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section order" id="order">
+    <div class="wrap order-inner">
+      <div>
+        <span class="kicker">Личный подбор</span>
+        <h2>Не знаете, что выбрать?</h2>
+        <p class="sub">Оставьте заявку — стилист магазина свяжется с вами, уточнит параметры и соберёт подборку образов под ваш запрос.</p>
+      </div>
+      <form id="orderForm" novalidate>
+        <div class="field"><label for="o-name">Ваше имя</label><input type="text" id="o-name" name="name" required placeholder="Как к вам обращаться"></div>
+        <div class="field"><label for="o-contact">Телефон / WhatsApp</label><input type="text" id="o-contact" name="contact" required placeholder="+7 700 000-00-00"></div>
+        <div class="field"><label for="o-wish">Что ищете</label><select id="o-wish" name="wish">
+          <option>Верхняя одежда</option><option>Костюмы и брюки</option><option>Платья</option><option>Рубашки и база</option><option>Пока просто смотрю</option>
+        </select></div>
+        <button type="submit" class="btn">Оставить заявку</button>
+        <p class="form-note">После нажатия откроется WhatsApp с готовой заявкой — вам останется нажать «Отправить».</p>
+      </form>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <span>© <span id="year"></span> Atelier 12 · демо-сайт шаблона</span>
+    <a href="index.html">Витрина шаблонов ←</a>
+  </div>
+</footer>
+
+<script>
+/* КОНТАКТЫ — ЗАМЕНИТЕ НА ДАННЫЕ КЛИЕНТА (формат: 7XXXXXXXXXX) */
+const WHATSAPP = 'https://wa.me/70000000000';
+
+document.getElementById('year').textContent = new Date().getFullYear();
+document.getElementById('navToggle').addEventListener('click', () => {
+  const h = document.getElementById('header');
+  const open = h.classList.toggle('menu-open');
+  document.getElementById('navToggle').setAttribute('aria-expanded', open ? 'true' : 'false');
+});
+document.getElementById('mainNav').addEventListener('click', e => {
+  if (e.target.closest('a')) document.getElementById('header').classList.remove('menu-open');
+});
+document.getElementById('orderForm').addEventListener('submit', e => {
+  e.preventDefault();
+  const form = e.target;
+  if (!form.reportValidity()) return;
+  const data = new FormData(form);
+  const text = 'Заявка с сайта ATELIER 12\nИмя: ' + (data.get('name') || '-') +
+    '\nСвязь: ' + (data.get('contact') || '-') +
+    '\nИнтересует: ' + (data.get('wish') || '-');
+  window.open(WHATSAPP + '?text=' + encodeURIComponent(text), '_blank');
+  const btn = form.querySelector('button[type="submit"]');
+  btn.textContent = 'Открыли WhatsApp — нажмите «Отправить»';
+  setTimeout(() => { btn.textContent = 'Оставить заявку'; }, 4000);
+});
+</script>
+</body>
+</html>

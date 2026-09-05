@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Зерно&amp;Пар — кофейня (демо-сайт)</title>
+<style>
+:root{
+  --bg:#fbf5ec;--ink:#3d2f26;--muted:#8a7a6c;--terra:#c2622f;--card:#ffffff;
+  --sans:Arial,Helvetica,sans-serif;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--ink);font-family:var(--sans);font-size:16px;line-height:1.65;-webkit-font-smoothing:antialiased}
+a{color:inherit}
+.wrap{max-width:1000px;margin:0 auto;padding:0 24px}
+section{scroll-margin-top:90px}
+.demo-bar{background:#f3e9da;border-bottom:1px solid #e8dcc9;font-size:12.5px}
+.demo-bar .wrap{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;padding-top:6px;padding-bottom:6px}
+.demo-bar a{color:var(--muted);text-decoration:none}
+.demo-bar a:hover{color:var(--ink)}
+.demo-tag{color:#c0a98d;letter-spacing:.12em;text-transform:uppercase;font-size:10px}
+header{position:sticky;top:0;z-index:40;background:rgba(251,245,236,.95);backdrop-filter:blur(8px);border-bottom:1px solid #e8dcc9}
+.header-in{display:flex;align-items:center;justify-content:space-between;height:66px}
+.logo{font-weight:800;font-size:19px;text-decoration:none}
+.logo span{color:var(--terra)}
+nav.main{display:flex;gap:24px;align-items:center}
+nav.main a{font-size:12px;color:var(--muted);text-decoration:none}
+nav.main a:hover{color:var(--ink)}
+.nav-toggle{display:none;background:none;border:1px solid #e8dcc9;width:42px;height:42px;position:relative;cursor:pointer}
+.nav-toggle span{position:absolute;left:11px;right:11px;height:2px;background:var(--ink);transition:transform .2s,opacity .2s}
+.nav-toggle span:nth-child(1){top:14px}.nav-toggle span:nth-child(2){top:20px}.nav-toggle span:nth-child(3){top:26px}
+header.menu-open .nav-toggle span:nth-child(1){transform:translateY(6px) rotate(45deg)}
+header.menu-open .nav-toggle span:nth-child(2){opacity:0}
+header.menu-open .nav-toggle span:nth-child(3){transform:translateY(-6px) rotate(-45deg)}
+.hero{padding:64px 0}
+.hero-grid{display:grid;grid-template-columns:.85fr 1.15fr;gap:44px;align-items:center}
+.circle{width:min(250px,80%);aspect-ratio:1;border-radius:50%;background:radial-gradient(circle at 35% 30%,#8a5a3b,#5d3a24 72%);box-shadow:inset 0 0 0 10px #f0e2cf;position:relative;margin:0 auto}
+.badge{position:absolute;right:-14px;top:2px;background:var(--terra);color:#fff;border-radius:50%;width:92px;height:92px;display:flex;align-items:center;justify-content:center;text-align:center;font-size:10.5px;font-weight:700;line-height:1.35;transform:rotate(12deg)}
+.hero h1{font-weight:800;font-size:clamp(28px,4.4vw,40px);line-height:1.15}
+.hero h1 em{color:var(--terra);font-style:normal}
+.hero p{color:var(--muted);margin:14px 0 22px;max-width:420px;font-size:14.5px}
+.chips{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:24px}
+.chip{border:1.5px solid var(--ink);border-radius:999px;padding:6px 15px;font-size:11px;font-weight:700}
+.btn{display:inline-block;background:var(--ink);color:#fff;border:1px solid var(--ink);border-radius:999px;padding:14px 30px;font-size:13px;font-weight:700;text-decoration:none;cursor:pointer;font-family:var(--sans)}
+.btn:hover{background:var(--terra);border-color:var(--terra)}
+.btn-terra{background:var(--terra);border-color:var(--terra)}
+.btn-terra:hover{background:#a8501f;border-color:#a8501f}
+.section{padding:60px 0;border-top:1px solid #e8dcc9}
+.section-head{margin-bottom:34px}
+.section-head h2{font-weight:800;font-size:clamp(24px,3.2vw,32px)}
+.section-head h2 em{color:var(--terra);font-style:normal}
+.section-head p{color:var(--muted);margin-top:8px;max-width:480px;font-size:14.5px}
+.menu-grid{display:grid;grid-template-columns:1fr 1fr;gap:0 50px}
+.menu-item{display:flex;align-items:baseline;padding:13px 0;border-bottom:1px dashed #d9c8b2}
+.menu-item .dots{flex:1;border-bottom:1px dotted #cdbba2;margin:0 12px;min-width:20px}
+.menu-item b{color:var(--terra);white-space:nowrap}
+.menu-item .m-name{font-weight:700;font-size:14.5px}
+.menu-item .m-sub{display:block;font-size:12px;color:var(--muted);font-weight:400}
+.tiles{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:8px}
+.tile{background:var(--card);border-radius:16px;padding:20px;box-shadow:0 8px 20px rgba(93,58,36,.08)}
+.tile b{display:block;font-size:14.5px;margin-bottom:6px}
+.tile span{font-size:13px;color:var(--muted)}
+.book{background:var(--card)}
+.book .wrap{padding-top:56px;padding-bottom:56px}
+.book-inner{display:grid;grid-template-columns:1fr 1fr;gap:46px;align-items:start}
+.book h2{font-weight:800;font-size:clamp(24px,3.2vw,32px);margin-bottom:10px}
+.book h2 em{color:var(--terra);font-style:normal}
+.book .sub{color:var(--muted);font-size:14.5px}
+.field{margin-bottom:16px}
+.field label{display:block;font-size:11px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);margin-bottom:7px}
+.field input,.field select{width:100%;border:1.5px solid #e8dcc9;border-radius:12px;background:#fff;padding:13px 14px;font-size:15px;font-family:var(--sans);color:var(--ink)}
+.field input:focus,.field select:focus{outline:none;border-color:var(--terra)}
+.book .btn{width:100%}
+.form-note{font-size:12px;color:var(--muted);margin-top:12px}
+footer{padding:24px 0;border-top:1px solid #e8dcc9;font-size:12.5px;color:var(--muted)}
+footer .wrap{display:flex;justify-content:space-between;gap:14px;flex-wrap:wrap}
+footer a{text-decoration:none}
+@media (max-width:860px){
+  nav.main{display:none;position:absolute;top:66px;left:0;right:0;background:#fff;border-bottom:1px solid #e8dcc9;flex-direction:column;align-items:stretch;padding:12px 24px 20px;gap:0}
+  nav.main a{padding:13px 0;border-bottom:1px solid #f0e6d6;font-size:13.5px}
+  header.menu-open nav.main{display:flex}
+  .nav-toggle{display:block}
+}
+@media (max-width:760px){
+  .hero{padding:48px 0}
+  .hero-grid{grid-template-columns:1fr;gap:30px}
+  .menu-grid{grid-template-columns:1fr;gap:0}
+  .tiles{grid-template-columns:1fr}
+  .book-inner{grid-template-columns:1fr;gap:32px}
+  .section{padding:46px 0}
+  .book .wrap{padding-top:46px;padding-bottom:46px}
+}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{transition:none!important}}
+</style>
+</head>
+<body>
+
+<div class="demo-bar">
+  <div class="wrap">
+    <a href="index.html">← Вернуться к витрине шаблонов</a>
+    <span class="demo-tag">Демо-сайт · шаблон «Кофейня»</span>
+  </div>
+</div>
+
+<header id="header">
+  <div class="wrap header-in">
+    <a class="logo" href="#top">Зерно<span>&amp;</span>Пар</a>
+    <nav class="main" id="mainNav">
+      <a href="#menu">Меню</a>
+      <a href="#why">Почему мы</a>
+      <a href="#book">Столик</a>
+      <a href="#contacts">Адрес</a>
+    </nav>
+    <button class="nav-toggle" id="navToggle" aria-label="Открыть меню" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</header>
+
+<main id="top">
+
+  <section class="hero">
+    <div class="wrap hero-grid">
+      <div class="circle"><div class="badge">открыто<br>с 8:00<br>каждый день</div></div>
+      <div>
+        <h1>Кофе, который <em>будит город</em></h1>
+        <p>Обжариваем зерно сами, варим на альтернативе и кормим завтраками весь день. Заходите за чашкой или работайте у окна.</p>
+        <div class="chips"><span class="chip">Эспрессо</span><span class="chip">Фильтр</span><span class="chip">Матча</span><span class="chip">Завтраки</span><span class="chip">Десерты</span></div>
+        <a class="btn btn-terra" href="#book">Забронировать столик</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="menu">
+    <div class="wrap">
+      <div class="section-head">
+        <h2>Меню <em>на каждый день</em></h2>
+        <p>Кофе на зерне собственной обжарки, альтернатива и завтраки до закрытия.</p>
+      </div>
+      <div class="menu-grid">
+        <div class="menu-item"><span class="m-name">Капучино<span class="m-sub">Классический или на овсяном</span></span><span class="dots"></span><b>1 100 ₸</b></div>
+        <div class="menu-item"><span class="m-name">Фильтр-кофе<span class="m-sub">Сорт недели, воронка</span></span><span class="dots"></span><b>1 300 ₸</b></div>
+        <div class="menu-item"><span class="m-name">Латте на матче<span class="m-sub">Мягкий, без кофеина на ночь</span></span><span class="dots"></span><b>1 500 ₸</b></div>
+        <div class="menu-item"><span class="m-name">Раф «Солёная карамель»<span class="m-sub">Хит заведения</span></span><span class="dots"></span><b>1 600 ₸</b></div>
+        <div class="menu-item"><span class="m-name">Сырники<span class="m-sub">Со сметаной и вареньем</span></span><span class="dots"></span><b>1 900 ₸</b></div>
+        <div class="menu-item"><span class="m-name">Круассан с ветчиной<span class="m-sub">Согревается перед подачей</span></span><span class="dots"></span><b>1 400 ₸</b></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="why">
+    <div class="wrap">
+      <div class="section-head"><h2>Почему <em>заходят снова</em></h2></div>
+      <div class="tiles">
+        <div class="tile"><b>Свой обжарщик</b><span>Зерно обжариваем небольшими партиями каждую неделю — кофе всегда свежий.</span></div>
+        <div class="tile"><b>Центр города</b><span>Две минуты от метро, окна на проспект, розетки у каждого столика.</span></div>
+        <div class="tile"><b>Работа у окна</b><span>Тихая музыка, вайфай и кофёйтесь сколько хотите — мы не прогоняем.</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section book" id="book" style="border-top:none">
+    <div class="wrap">
+      <div class="book-inner">
+        <div>
+          <h2>Забронируйте <em>столик у окна</em></h2>
+          <p class="sub">Оставьте заявку — подтвердим бронь в течение часа в рабочее время (8:00–22:00).</p>
+        </div>
+        <form id="bookForm" novalidate>
+          <div class="field"><label for="b-name">Ваше имя</label><input type="text" id="b-name" name="name" required placeholder="Как к вам обращаться"></div>
+          <div class="field"><label for="b-phone">Телефон / WhatsApp</label><input type="text" id="b-phone" name="phone" required placeholder="+7 700 000-00-00"></div>
+          <div class="field"><label for="b-when">Когда и сколько гостей</label><input type="text" id="b-when" name="when" placeholder="Например: завтра, 12:00, 2 гостя"></div>
+          <button type="submit" class="btn">Забронировать</button>
+          <p class="form-note">После нажатия откроется WhatsApp с готовой заявкой — вам останется нажать «Отправить».</p>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="contacts" style="border-top:none">
+    <div class="wrap">
+      <div class="section-head"><h2>Мы <em>здесь</em></h2></div>
+      <div class="tiles">
+        <div class="tile"><b>Адрес</b><span>пр. Мира, 25, первая линия, вход с торца</span></div>
+        <div class="tile"><b>Часы</b><span>Ежедневно с 8:00 до 22:00</span></div>
+        <div class="tile"><b>Связь</b><span><a href="tel:+77000000000">+7 700 000-00-00</a></span></div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <span>© <span id="year"></span> Кофейня «Зерно&amp;Пар» · демо-сайт шаблона</span>
+    <a href="index.html">Витрина шаблонов ←</a>
+  </div>
+</footer>
+
+<script>
+/* КОНТАКТЫ — ЗАМЕНИТЕ НА ДАННЫЕ КЛИЕНТА (формат: 7XXXXXXXXXX) */
+const WHATSAPP = 'https://wa.me/70000000000';
+
+document.getElementById('year').textContent = new Date().getFullYear();
+document.getElementById('navToggle').addEventListener('click', () => {
+  const h = document.getElementById('header');
+  const open = h.classList.toggle('menu-open');
+  document.getElementById('navToggle').setAttribute('aria-expanded', open ? 'true' : 'false');
+});
+document.getElementById('mainNav').addEventListener('click', e => {
+  if (e.target.closest('a')) document.getElementById('header').classList.remove('menu-open');
+});
+document.getElementById('bookForm').addEventListener('submit', e => {
+  e.preventDefault();
+  const form = e.target;
+  if (!form.reportValidity()) return;
+  const data = new FormData(form);
+  const text = 'Бронь столика — Зерно&Пар\nИмя: ' + (data.get('name') || '-') +
+    '\nТелефон: ' + (data.get('phone') || '-') +
+    '\nКогда и сколько гостей: ' + (data.get('when') || '-');
+  window.open(WHATSAPP + '?text=' + encodeURIComponent(text), '_blank');
+  const btn = form.querySelector('button[type="submit"]');
+  btn.textContent = 'Открыли WhatsApp — нажмите «Отправить»';
+  setTimeout(() => { btn.textContent = 'Забронировать'; }, 4000);
+});
+</script>
+</body>
+</html>

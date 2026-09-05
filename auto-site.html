@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>МОТОР·СЕРВИС — автосервис (демо-сайт)</title>
+<style>
+:root{
+  --bg:#eef0f2;--ink:#151a20;--muted:#5a6470;--line:#d5dae0;--orange:#f07d1a;--dark:#151a20;
+  --sans:Arial,Helvetica,sans-serif;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--ink);font-family:var(--sans);font-size:16px;line-height:1.65;-webkit-font-smoothing:antialiased}
+a{color:inherit}
+.wrap{max-width:1080px;margin:0 auto;padding:0 24px}
+section{scroll-margin-top:90px}
+.demo-bar{background:#0f1318;color:#8b95a1;font-size:12.5px}
+.demo-bar .wrap{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;padding-top:6px;padding-bottom:6px}
+.demo-bar a{color:#8b95a1;text-decoration:none}
+.demo-bar a:hover{color:#fff}
+.demo-tag{color:#5a6470;letter-spacing:.12em;text-transform:uppercase;font-size:10px}
+header{position:sticky;top:0;z-index:40;background:var(--dark);color:#fff}
+.header-in{display:flex;align-items:center;justify-content:space-between;height:62px}
+.logo{font-weight:900;font-size:17px;letter-spacing:.06em;text-decoration:none}
+.logo span{color:var(--orange)}
+nav.main{display:flex;gap:24px;align-items:center}
+nav.main a{font-size:11.5px;letter-spacing:.1em;text-transform:uppercase;color:#aab3bd;text-decoration:none}
+nav.main a:hover{color:#fff}
+.nav-toggle{display:none;background:none;border:1px solid #2c333b;width:42px;height:42px;position:relative;cursor:pointer}
+.nav-toggle span{position:absolute;left:11px;right:11px;height:2px;background:#fff;transition:transform .2s,opacity .2s}
+.nav-toggle span:nth-child(1){top:14px}.nav-toggle span:nth-child(2){top:20px}.nav-toggle span:nth-child(3){top:26px}
+header.menu-open .nav-toggle span:nth-child(1){transform:translateY(6px) rotate(45deg)}
+header.menu-open .nav-toggle span:nth-child(2){opacity:0}
+header.menu-open .nav-toggle span:nth-child(3){transform:translateY(-6px) rotate(-45deg)}
+.header-phone{font-weight:700;font-size:13.5px;text-decoration:none}
+.header-phone b{color:var(--orange)}
+.hero{padding:64px 0}
+.hero-grid{display:grid;grid-template-columns:1.1fr .9fr;gap:44px;align-items:center}
+.kicker{font-size:11px;letter-spacing:.24em;text-transform:uppercase;color:var(--orange);font-weight:700;display:block;margin-bottom:14px}
+.hero h1{font-size:clamp(28px,4.4vw,42px);font-weight:900;text-transform:uppercase;line-height:1.12}
+.hero p{color:var(--muted);margin:14px 0 20px;max-width:440px;font-size:14.5px}
+.checks{list-style:none;margin-bottom:24px}
+.checks li{padding:6px 0 6px 26px;position:relative;font-weight:700;font-size:14px}
+.checks li::before{content:'';position:absolute;left:0;top:11px;width:12px;height:12px;background:var(--orange)}
+.btn{display:inline-block;background:var(--orange);color:#fff;border:1px solid var(--orange);padding:15px 30px;font-size:12.5px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;text-decoration:none;cursor:pointer;font-family:var(--sans)}
+.btn:hover{background:#d06a10;border-color:#d06a10}
+.btn-ghost{background:transparent;color:var(--ink);border-color:var(--ink)}
+.btn-ghost:hover{background:var(--ink);border-color:var(--ink)}
+.hero-img{height:340px;background:linear-gradient(210deg,#3d454f,#22282f 70%);position:relative}
+.hero-img::after{content:'';position:absolute;left:0;right:0;bottom:0;height:6px;background:var(--orange)}
+.hero-note{margin-top:14px;font-size:12.5px;color:var(--muted)}
+.section{padding:60px 0;border-top:1px solid var(--line)}
+.section-head{margin-bottom:34px}
+.section-head h2{font-size:clamp(24px,3.2vw,32px);font-weight:900;text-transform:uppercase}
+.section-head p{color:var(--muted);margin-top:8px;max-width:520px;font-size:14.5px}
+.services{display:grid;grid-template-columns:repeat(4,1fr);background:#fff;border:1px solid var(--line)}
+.srv{padding:22px 18px;border-right:1px solid var(--line);border-bottom:1px solid var(--line)}
+.srv:nth-child(4n){border-right:none}
+.srv .num{font-size:11px;font-weight:900;color:var(--orange);letter-spacing:.1em}
+.srv b{display:block;font-size:14px;margin:8px 0 6px}
+.srv span{font-size:12.5px;color:var(--muted)}
+.banner{margin-top:34px;background:var(--dark);color:#fff;display:flex;justify-content:space-between;align-items:center;gap:14px;padding:20px 24px;flex-wrap:wrap}
+.banner b{color:var(--orange)}
+.banner span{font-size:14px}
+.book .wrap{padding-top:56px;padding-bottom:56px}
+.book{background:#fff}
+.book-inner{display:grid;grid-template-columns:1fr 1fr;gap:46px;align-items:start}
+.book h2{font-size:clamp(24px,3.2vw,32px);font-weight:900;text-transform:uppercase;margin-bottom:10px}
+.book .sub{color:var(--muted);font-size:14.5px}
+.field{margin-bottom:16px}
+.field label{display:block;font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin-bottom:7px}
+.field input,.field select{width:100%;border:1px solid var(--line);background:#eef0f2;padding:13px 14px;font-size:15px;font-family:var(--sans);color:var(--ink)}
+.field input:focus,.field select:focus{outline:none;border-color:var(--orange)}
+.book .btn{width:100%}
+.form-note{font-size:12px;color:var(--muted);margin-top:12px}
+footer{padding:24px 0;border-top:1px solid var(--line);font-size:12.5px;color:var(--muted)}
+footer .wrap{display:flex;justify-content:space-between;gap:14px;flex-wrap:wrap}
+footer a{text-decoration:none}
+@media (max-width:860px){
+  nav.main{display:none;position:absolute;top:62px;left:0;right:0;background:#10151b;border-bottom:1px solid #2c333b;flex-direction:column;align-items:stretch;padding:12px 24px 20px;gap:0}
+  nav.main a{padding:13px 0;border-bottom:1px solid #1d242c;font-size:13px}
+  header.menu-open nav.main{display:flex}
+  .nav-toggle{display:block}
+}
+@media (max-width:900px){
+  .services{grid-template-columns:1fr 1fr}
+  .srv:nth-child(4n){border-right:1px solid var(--line)}
+  .srv:nth-child(2n){border-right:none}
+}
+@media (max-width:760px){
+  .hero{padding:48px 0}
+  .hero-grid{grid-template-columns:1fr;padding:48px 24px;gap:30px}
+  .hero-img{height:220px}
+  .book-inner{grid-template-columns:1fr;gap:32px}
+  .section{padding:46px 0}
+}
+@media (max-width:520px){
+  .services{grid-template-columns:1fr}
+  .srv{border-right:none!important}
+}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{transition:none!important}}
+</style>
+</head>
+<body>
+
+<div class="demo-bar">
+  <div class="wrap">
+    <a href="index.html">← Вернуться к витрине шаблонов</a>
+    <span class="demo-tag">Демо-сайт · шаблон «Автосервис»</span>
+  </div>
+</div>
+
+<header id="header">
+  <div class="wrap header-in">
+    <a class="logo" href="#top">МОТОР<span>·СЕРВИС</span></a>
+    <nav class="main" id="mainNav">
+      <a href="#services">Услуги</a>
+      <a href="#why">Почему мы</a>
+      <a href="#book">Запись</a>
+      <a href="#contacts">Контакты</a>
+    </nav>
+    <a class="header-phone" href="tel:+77000000000">+7 700 <b>000-00-00</b></a>
+    <button class="nav-toggle" id="navToggle" aria-label="Открыть меню" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</header>
+
+<main id="top">
+
+  <section class="hero">
+    <div class="wrap hero-grid">
+      <div>
+        <span class="kicker">Автосервис полного цикла</span>
+        <h1>Ремонт и обслуживание автомобилей</h1>
+        <p>Диагностика, ТО, ремонт ходовой и двигателя. Работаем по записи, фиксируем цену до начала работ.</p>
+        <ul class="checks">
+          <li>Диагностика перед покупкой авто</li>
+          <li>Техобслуживание по регламенту</li>
+          <li>Ремонт ходовой и тормозной системы</li>
+        </ul>
+        <a class="btn" href="#book">Записаться на сервис</a>
+        <p class="hero-note">Пн–Сб 9:00–19:00 · ул. Промышленная, 7</p>
+      </div>
+      <div class="hero-img"></div>
+    </div>
+  </section>
+
+  <section class="section" id="services">
+    <div class="wrap">
+      <div class="section-head">
+        <h2>Услуги</h2>
+        <p>Диагностика бесплатна при последующем ремонте у нас.</p>
+      </div>
+      <div class="services">
+        <div class="srv"><span class="num">01</span><b>Диагностика</b><span>Компьютерная и визуальная проверка всех систем</span></div>
+        <div class="srv"><span class="num">02</span><b>ТО</b><span>Замена масла, фильтров, свечей по регламенту</span></div>
+        <div class="srv"><span class="num">03</span><b>Ходовая</b><span>Ремонт подвески, рулевого, тормозов</span></div>
+        <div class="srv"><span class="num">04</span><b>Двигатель</b><span>От текущего ремонта до капитального</span></div>
+        <div class="srv"><span class="num">05</span><b>Электрика</b><span>Поиск неисправностей, ремонт проводки</span></div>
+        <div class="srv"><span class="num">06</span><b>Кондиционеры</b><span>Заправка, ремонт, антибактериальная обработка</span></div>
+        <div class="srv"><span class="num">07</span><b>Шиномонтаж</b><span>Сезонная смена, балансировка</span></div>
+        <div class="srv"><span class="num">08</span><b>Выкуп авто</b><span>Осмотр и справедливая оценка</span></div>
+      </div>
+      <div class="banner">
+        <span>Запишитесь на удобное время — перезвоним за 10 минут</span>
+        <a class="btn" href="#book" style="padding:12px 22px">Оставить заявку</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="why">
+    <div class="wrap">
+      <div class="section-head"><h2>Почему нам доверяют</h2></div>
+      <div class="services" style="grid-template-columns:repeat(3,1fr)">
+        <div class="srv"><span class="num">→</span><b>Смета до начала работ</b><span>Цена фиксируется до того, как мастер возьмёт ключи</span></div>
+        <div class="srv"><span class="num">→</span><b>Гарантия на работы</b><span>Даём гарантию и на работы, и на установленные запчасти</span></div>
+        <div class="srv"><span class="num">→</span><b>Показываем замену</b><span>Снятые детали отдаём или показываем — всё честно</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section book" id="book" style="border-top:none">
+    <div class="wrap">
+      <div class="book-inner">
+        <div>
+          <span class="kicker">Запись онлайн</span>
+          <h2>Запишитесь на диагностику</h2>
+          <p class="sub">Опишите проблему — перезвоним, подскажем по стоимости и подберём время.</p>
+        </div>
+        <form id="bookForm" novalidate>
+          <div class="field"><label for="b-name">Ваше имя</label><input type="text" id="b-name" name="name" required placeholder="Как к вам обращаться"></div>
+          <div class="field"><label for="b-phone">Телефон / WhatsApp</label><input type="text" id="b-phone" name="phone" required placeholder="+7 700 000-00-00"></div>
+          <div class="field"><label for="b-car">Авто и что беспокоит</label><input type="text" id="b-car" name="car" placeholder="Например: Toyota Camry 2015, стук спереди"></div>
+          <button type="submit" class="btn">Записаться</button>
+          <p class="form-note">После нажатия откроется WhatsApp с готовой заявкой — вам останется нажать «Отправить».</p>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="contacts" style="border-top:none">
+    <div class="wrap">
+      <div class="section-head"><h2>Контакты</h2></div>
+      <div class="services" style="grid-template-columns:repeat(3,1fr)">
+        <div class="srv"><span class="num">Адрес</span><b>ул. Промышленная, 7</b><span>Заезд со стороны АЗС</span></div>
+        <div class="srv"><span class="num">Режим</span><b>Пн–Сб 9:00–19:00</b><span>Воскресенье — по записи</span></div>
+        <div class="srv"><span class="num">Связь</span><b><a href="tel:+77000000000">+7 700 000-00-00</a></b><span>Звонок или WhatsApp</span></div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <span>© <span id="year"></span> Автосервис «Мотор·Сервис» · демо-сайт шаблона</span>
+    <a href="index.html">Витрина шаблонов ←</a>
+  </div>
+</footer>
+
+<script>
+/* КОНТАКТЫ — ЗАМЕНИТЕ НА ДАННЫЕ КЛИЕНТА (формат: 7XXXXXXXXXX) */
+const WHATSAPP = 'https://wa.me/70000000000';
+
+document.getElementById('year').textContent = new Date().getFullYear();
+document.getElementById('navToggle').addEventListener('click', () => {
+  const h = document.getElementById('header');
+  const open = h.classList.toggle('menu-open');
+  document.getElementById('navToggle').setAttribute('aria-expanded', open ? 'true' : 'false');
+});
+document.getElementById('mainNav').addEventListener('click', e => {
+  if (e.target.closest('a')) document.getElementById('header').classList.remove('menu-open');
+});
+document.getElementById('bookForm').addEventListener('submit', e => {
+  e.preventDefault();
+  const form = e.target;
+  if (!form.reportValidity()) return;
+  const data = new FormData(form);
+  const text = 'Запись в автосервис\nИмя: ' + (data.get('name') || '-') +
+    '\nТелефон: ' + (data.get('phone') || '-') +
+    '\nАвто и проблема: ' + (data.get('car') || '-');
+  window.open(WHATSAPP + '?text=' + encodeURIComponent(text), '_blank');
+  const btn = form.querySelector('button[type="submit"]');
+  btn.textContent = 'Открыли WhatsApp — нажмите «Отправить»';
+  setTimeout(() => { btn.textContent = 'Записаться'; }, 4000);
+});
+</script>
+</body>
+</html>

@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ФОРМА — фитнес-клуб (демо-сайт)</title>
+<style>
+:root{
+  --bg:#101214;--panel:#16181b;--ink:#f2f4f5;--muted:#9aa0a8;--line:#23262a;--lime:#c6f24e;
+  --sans:Arial,Helvetica,sans-serif;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--ink);font-family:var(--sans);font-size:16px;line-height:1.65;-webkit-font-smoothing:antialiased}
+a{color:inherit}
+.wrap{max-width:1080px;margin:0 auto;padding:0 24px}
+section{scroll-margin-top:90px}
+.demo-bar{background:#0a0b0d;border-bottom:1px solid var(--line);font-size:12.5px}
+.demo-bar .wrap{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;padding-top:6px;padding-bottom:6px}
+.demo-bar a{color:var(--muted);text-decoration:none}
+.demo-bar a:hover{color:var(--ink)}
+.demo-tag{color:#5d636b;letter-spacing:.12em;text-transform:uppercase;font-size:10px}
+header{position:sticky;top:0;z-index:40;background:rgba(16,18,20,.95);backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
+.header-in{display:flex;align-items:center;justify-content:space-between;height:64px}
+.logo{font-weight:900;font-size:19px;letter-spacing:.16em;text-decoration:none}
+.logo span{color:var(--lime)}
+nav.main{display:flex;gap:24px;align-items:center}
+nav.main a{font-size:10.5px;letter-spacing:.18em;text-transform:uppercase;color:var(--muted);text-decoration:none}
+nav.main a:hover{color:var(--ink)}
+.nav-toggle{display:none;background:none;border:1px solid var(--line);width:42px;height:42px;position:relative;cursor:pointer}
+.nav-toggle span{position:absolute;left:11px;right:11px;height:2px;background:var(--ink);transition:transform .2s,opacity .2s}
+.nav-toggle span:nth-child(1){top:14px}.nav-toggle span:nth-child(2){top:20px}.nav-toggle span:nth-child(3){top:26px}
+header.menu-open .nav-toggle span:nth-child(1){transform:translateY(6px) rotate(45deg)}
+header.menu-open .nav-toggle span:nth-child(2){opacity:0}
+header.menu-open .nav-toggle span:nth-child(3){transform:translateY(-6px) rotate(-45deg)}
+.hero{padding:64px 0}
+.hero-grid{display:grid;grid-template-columns:1.1fr .9fr;gap:44px;align-items:center}
+.kicker{font-size:10.5px;letter-spacing:.28em;text-transform:uppercase;color:var(--lime);font-weight:900;display:block;margin-bottom:16px}
+.hero h1{font-size:clamp(38px,6vw,64px);font-weight:900;text-transform:uppercase;line-height:.98;letter-spacing:-.01em}
+.hero h1 span{color:var(--lime)}
+.hero p{color:var(--muted);margin:18px 0 26px;max-width:400px;font-size:14.5px}
+.btn{display:inline-block;background:var(--lime);color:#101214;border:1px solid var(--lime);padding:16px 30px;font-size:12.5px;font-weight:900;letter-spacing:.1em;text-transform:uppercase;text-decoration:none;cursor:pointer;font-family:var(--sans)}
+.btn:hover{background:#b2dc3d;border-color:#b2dc3d}
+.btn-ghost{background:transparent;color:var(--ink);border-color:var(--line)}
+.btn-ghost:hover{background:transparent;border-color:var(--lime);color:var(--lime)}
+.hero-img{height:360px;background:linear-gradient(215deg,#2a2e33,#16181b 65%);border-left:5px solid var(--lime);position:relative}
+.hero-img::after{content:'ФОРМА.';position:absolute;left:24px;bottom:18px;font-weight:900;font-size:24px;letter-spacing:.14em;color:#3a3f45}
+.hero-note{margin-top:14px;font-size:12.5px;color:var(--muted)}
+.section{padding:60px 0;border-top:1px solid var(--line)}
+.section-head{margin-bottom:34px}
+.section-head h2{font-size:clamp(26px,3.4vw,36px);font-weight:900;text-transform:uppercase;line-height:1.05}
+.section-head h2 span{color:var(--lime)}
+.section-head p{color:var(--muted);margin-top:10px;max-width:520px;font-size:14.5px}
+.sched{border-top:1px solid var(--line)}
+.sched-row{display:flex;align-items:baseline;justify-content:space-between;gap:12px;padding:16px 2px;border-bottom:1px solid var(--line);flex-wrap:wrap}
+.sched-row .name{font-weight:700;font-size:16px}
+.sched-row .sub{display:block;font-size:12.5px;color:var(--muted);font-weight:400;margin-top:2px}
+.sched-row .time{color:var(--lime);font-weight:900;font-size:12px;letter-spacing:.12em;white-space:nowrap}
+.plans{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.plan{background:var(--panel);border:1px solid var(--line);padding:26px 24px}
+.plan.hit{border-color:var(--lime)}
+.plan .p-name{font-weight:900;font-size:15px;letter-spacing:.1em;text-transform:uppercase}
+.plan .p-price{font-size:34px;font-weight:900;margin:10px 0 2px}
+.plan .p-price small{font-size:13px;color:var(--muted);font-weight:400}
+.plan ul{list-style:none;margin:16px 0 20px}
+.plan ul li{font-size:13.5px;color:var(--muted);padding:5px 0 5px 20px;position:relative}
+.plan ul li::before{content:'✓';position:absolute;left:0;color:var(--lime)}
+.plan .btn{width:100%;text-align:center;padding:13px}
+.book{background:var(--panel)}
+.book .wrap{padding-top:56px;padding-bottom:56px}
+.book-inner{display:grid;grid-template-columns:1fr 1fr;gap:46px;align-items:start}
+.book h2{font-size:clamp(24px,3.2vw,32px);font-weight:900;text-transform:uppercase;line-height:1.1;margin-bottom:10px}
+.book h2 span{color:var(--lime)}
+.book .sub{color:var(--muted);font-size:14.5px}
+.field{margin-bottom:16px}
+.field label{display:block;font-size:10.5px;font-weight:900;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);margin-bottom:7px}
+.field input,.field select{width:100%;background:#101214;border:1px solid var(--line);color:var(--ink);padding:13px 14px;font-size:15px;font-family:var(--sans)}
+.field input:focus,.field select:focus{outline:none;border-color:var(--lime)}
+.book .btn{width:100%}
+.form-note{font-size:12px;color:var(--muted);margin-top:12px}
+footer{padding:24px 0;border-top:1px solid var(--line);font-size:12.5px;color:var(--muted)}
+footer .wrap{display:flex;justify-content:space-between;gap:14px;flex-wrap:wrap}
+footer a{text-decoration:none}
+@media (max-width:860px){
+  nav.main{display:none;position:absolute;top:64px;left:0;right:0;background:#16181b;border-bottom:1px solid var(--line);flex-direction:column;align-items:stretch;padding:12px 24px 20px;gap:0}
+  nav.main a{padding:13px 0;border-bottom:1px solid #1d2024;font-size:13px}
+  header.menu-open nav.main{display:flex}
+  .nav-toggle{display:block}
+}
+@media (max-width:900px){
+  .plans{grid-template-columns:1fr}
+  .plan.hit{border-width:2px}
+}
+@media (max-width:760px){
+  .hero{padding:46px 0}
+  .hero-grid{grid-template-columns:1fr;gap:32px}
+  .hero-img{height:220px}
+  .book-inner{grid-template-columns:1fr;gap:32px}
+  .section{padding:46px 0}
+}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{transition:none!important}}
+</style>
+</head>
+<body>
+
+<div class="demo-bar">
+  <div class="wrap">
+    <a href="index.html">← Вернуться к витрине шаблонов</a>
+    <span class="demo-tag">Демо-сайт · шаблон «Фитнес-клуб»</span>
+  </div>
+</div>
+
+<header id="header">
+  <div class="wrap header-in">
+    <a class="logo" href="#top">ФОРМА<span>.</span></a>
+    <nav class="main" id="mainNav">
+      <a href="#schedule">Расписание</a>
+      <a href="#plans">Абонементы</a>
+      <a href="#book">Пробная</a>
+      <a href="#contacts">Контакты</a>
+    </nav>
+    <button class="nav-toggle" id="navToggle" aria-label="Открыть меню" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</header>
+
+<main id="top">
+
+  <section class="hero">
+    <div class="wrap hero-grid">
+      <div>
+        <span class="kicker">Фитнес-клуб</span>
+        <h1>Тренируйся <span>на своих</span> условиях</h1>
+        <p>Зал с современным оборудованием, групповые тренировки и персональные программы под любую цель — от «начать бегать» до соревнований.</p>
+        <a class="btn" href="#book">Пробная тренировка</a>
+        <a class="btn btn-ghost" href="#plans" style="margin-left:10px">Абонементы</a>
+        <p class="hero-note">Пн–Пт 7:00–23:00 · Сб–Вс 9:00–21:00</p>
+      </div>
+      <div class="hero-img"></div>
+    </div>
+  </section>
+
+  <section class="section" id="schedule">
+    <div class="wrap">
+      <div class="section-head">
+        <h2>Расписание <span>на неделю</span></h2>
+        <p>Группы маленькие — до 10 человек, тренер успевает каждому.</p>
+      </div>
+      <div class="sched">
+        <div class="sched-row"><span class="name">Утренняя йога<span class="sub">Мягкая практика, подходит новичкам</span></span><span class="time">ПН · СР · ПТ — 8:00</span></div>
+        <div class="sched-row"><span class="name">Кроссфит<span class="sub">Круговая тренировка высокой интенсивности</span></span><span class="time">ВТ · ЧТ — 19:00</span></div>
+        <div class="sched-row"><span class="name">Силовая группа<span class="sub">Работа со свободными весами</span></span><span class="time">СБ — 11:00</span></div>
+        <div class="sched-row"><span class="name">Растяжка<span class="sub">Мобильность и восстановление</span></span><span class="time">СР · ВС — 18:00</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="plans">
+    <div class="wrap">
+      <div class="section-head">
+        <h2>Абонементы</h2>
+        <p>Заморозка — до 30 дней в году. Первый визит с экскурсией по залу — бесплатно.</p>
+      </div>
+      <div class="plans">
+        <div class="plan">
+          <div class="p-name">Днём</div>
+          <div class="p-price">18 000 ₸<small> / мес.</small></div>
+          <ul><li>Посещения до 17:00</li><li>Тренажёрный зал</li><li>Раздевалка с душевыми</li></ul>
+          <a class="btn btn-ghost" href="#book">Выбрать</a>
+        </div>
+        <div class="plan hit">
+          <div class="p-name">Безлимит</div>
+          <div class="p-price">28 000 ₸<small> / мес.</small></div>
+          <ul><li>Любое время работы клуба</li><li>Групповые тренировки</li><li>Программа от тренера</li></ul>
+          <a class="btn" href="#book">Выбрать</a>
+        </div>
+        <div class="plan">
+          <div class="p-name">Персональный</div>
+          <div class="p-price">52 000 ₸<small> / мес.</small></div>
+          <ul><li>Безлимит + 8 персональных</li><li>План питания</li><li>Замеры раз в месяц</li></ul>
+          <a class="btn btn-ghost" href="#book">Выбрать</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section book" id="book" style="border-top:none">
+    <div class="wrap">
+      <div class="book-inner">
+        <div>
+          <span class="kicker">Первый шаг</span>
+          <h2>Приходи на <span>пробную тренировку</span></h2>
+          <p class="sub">Бесплатное занятие с тренером: покажем зал, обсудим цели и подберём программу.</p>
+        </div>
+        <form id="bookForm" novalidate>
+          <div class="field"><label for="b-name">Твоё имя</label><input type="text" id="b-name" name="name" required placeholder="Как к тебе обращаться"></div>
+          <div class="field"><label for="b-phone">Телефон / WhatsApp</label><input type="text" id="b-phone" name="phone" required placeholder="+7 700 000-00-00"></div>
+          <div class="field"><label for="b-goal">Цель</label><select id="b-goal" name="goal">
+            <option>Похудеть</option><option>Набрать форму</option><option>Поддерживать себя в тонусе</option><option>Тренировки к соревнованиям</option>
+          </select></div>
+          <button type="submit" class="btn">Записаться на пробную</button>
+          <p class="form-note">После нажатия откроется WhatsApp с готовой заявкой — вам останется нажать «Отправить».</p>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="contacts" style="border-top:none">
+    <div class="wrap">
+      <div class="section-head"><h2>Мы <span>здесь</span></h2></div>
+      <div class="sched">
+        <div class="sched-row"><span class="name">Адрес<span class="sub">Два входа: с проспекта и со двора</span></span><span class="time">ул. Спортивная, 3</span></div>
+        <div class="sched-row"><span class="name">Часы<span class="sub">Выходные — до 21:00</span></span><span class="time">ПН–ПТ 7:00–23:00</span></div>
+        <div class="sched-row"><span class="name">Связь<span class="sub">Звонок или WhatsApp</span></span><span class="time"><a href="tel:+77000000000" style="color:inherit">+7 700 000-00-00</a></span></div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <span>© <span id="year"></span> Фитнес-клуб «Форма» · демо-сайт шаблона</span>
+    <a href="index.html">Витрина шаблонов ←</a>
+  </div>
+</footer>
+
+<script>
+/* КОНТАКТЫ — ЗАМЕНИТЕ НА ДАННЫЕ КЛИЕНТА (формат: 7XXXXXXXXXX) */
+const WHATSAPP = 'https://wa.me/70000000000';
+
+document.getElementById('year').textContent = new Date().getFullYear();
+document.getElementById('navToggle').addEventListener('click', () => {
+  const h = document.getElementById('header');
+  const open = h.classList.toggle('menu-open');
+  document.getElementById('navToggle').setAttribute('aria-expanded', open ? 'true' : 'false');
+});
+document.getElementById('mainNav').addEventListener('click', e => {
+  if (e.target.closest('a')) document.getElementById('header').classList.remove('menu-open');
+});
+document.getElementById('bookForm').addEventListener('submit', e => {
+  e.preventDefault();
+  const form = e.target;
+  if (!form.reportValidity()) return;
+  const data = new FormData(form);
+  const text = 'Пробная тренировка — ФОРМА\nИмя: ' + (data.get('name') || '-') +
+    '\nТелефон: ' + (data.get('phone') || '-') +
+    '\nЦель: ' + (data.get('goal') || '-');
+  window.open(WHATSAPP + '?text=' + encodeURIComponent(text), '_blank');
+  const btn = form.querySelector('button[type="submit"]');
+  btn.textContent = 'Открыли WhatsApp — нажмите «Отправить»';
+  setTimeout(() => { btn.textContent = 'Записаться на пробную'; }, 4000);
+});
+</script>
+</body>
+</html>
